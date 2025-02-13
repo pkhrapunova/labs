@@ -1,12 +1,13 @@
 package lab3;
 import java.util.Scanner;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Record {
     private LocalDateTime dateTime;
     private double price;
-    Master master;
-    Client client;
+    private Master master;
+    private Client client;
 
     public Record(LocalDateTime dateTime, double price, Master master, Client client) {
         this.dateTime = dateTime;
@@ -16,6 +17,10 @@ public class Record {
     }
 
     public Record() {
+        this.dateTime = LocalDateTime.now();
+        this.price = 0.0;
+        this.master = new Master();
+        this.client = new Client();
     }
 
     public LocalDateTime getDateTime() {
@@ -55,6 +60,25 @@ public class Record {
         return "DateTime=" + dateTime +
                 ", price=" + price +
                 ", master=" + master.toString() +
-                ", client=" + client.toString() ;
+                ", client=" + client.toString();
+    }
+
+    public void scan(){
+        Scanner input = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
+        String dateTimeStr = input.nextLine();
+        this.setDateTime(LocalDateTime.parse(dateTimeStr, formatter));
+
+        System.out.println("Enter price:");
+        this.setPrice(input.nextDouble());
+        input.nextLine();
+
+        System.out.println("Enter master details:");
+        this.master.scan();
+
+        System.out.println("Enter client details:");
+        this.client.scan();
     }
 }

@@ -3,13 +3,19 @@ import java.util.Scanner;
 
 public class MaterialConsumption {
     private int count;
-    Material material;
-    Record record;
+    private Material material;
+    private Record record;
 
     public MaterialConsumption(int count, Record record, Material material) {
         this.record = record;
         this.material = material;
         this.count = count;
+    }
+
+    public MaterialConsumption() {
+        this.count = 0;
+        this.material = new Material();
+        this.record = new Record();
     }
 
     public int getCount() {
@@ -40,6 +46,19 @@ public class MaterialConsumption {
     public String toString() {
         return "count=" + count +
                 ", material=" + material +
-                ", record=" + record.toString();
+                ", record=" + record;
+    }
+
+    public void scan(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter count:");
+        this.setCount(input.nextInt());
+        input.nextLine();
+
+        System.out.println("Enter material details:");
+        this.material.scan();
+
+        System.out.println("Enter record details:");
+        this.record.scan();
     }
 }

@@ -10,6 +10,7 @@ public class Master extends Person {
     }
 
     public Master() {
+        super();
         this.post = "";
     }
 
@@ -23,11 +24,18 @@ public class Master extends Person {
 
     @Override
     public String toString() {
-        return super.toString()+"post='" + post + '\'';
+        return super.toString() + ", post='" + post + '\'';
     }
 
+    @Override
     public void scan(){
         super.scan();
-
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter post:");
+        this.setPost(input.nextLine());
+    }
+    @Override
+    public void displayRole() {
+        System.out.println("Role: Master");
     }
 }

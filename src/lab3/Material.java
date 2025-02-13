@@ -5,12 +5,18 @@ import java.util.Scanner;
 public class Material {
     private String name;
     private double cost;
-    Categories categories;
+    private Categories categories;
 
     public Material(String name, double cost, Categories categories) {
         this.name = name;
         this.cost = cost;
         this.categories = categories;
+    }
+
+    public Material() {
+        this.name = "";
+        this.cost = 0.0;
+        this.categories = null;
     }
 
     public String getName() {
@@ -41,15 +47,18 @@ public class Material {
     public String toString() {
         return "name='" + name + '\'' +
                 ", cost=" + cost +
-                ", categories=" + categories.toString();
+                ", categories=" + (categories != null ? categories.toString() : "None");
     }
 
-    public void scan(){
+    public void scan() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter name");
+        System.out.println("Enter name:");
         this.setName(input.nextLine());
-        System.out.println("Enter cost");
-        this.setCost(input.nextInt());
-        //this.setCategories();
+        System.out.println("Enter cost:");
+        this.setCost(input.nextDouble());
+        input.nextLine();
+
+        System.out.println("Select a category:");
+        this.categories = Categories.scan();
     }
 }

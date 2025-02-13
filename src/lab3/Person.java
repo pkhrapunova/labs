@@ -42,9 +42,9 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "LastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", numberPhone='" + numberPhone + '\'';
+        return "LastName= " + lastName +
+                ", firstName= " + firstName +
+                ", numberPhone= " + numberPhone;
     }
     public void scan(){
         Scanner input = new Scanner(System.in);
@@ -55,4 +55,5 @@ public abstract class Person {
         System.out.println("Enter number phone");
         this.setNumberPhone(input.nextLine());
     }
+    public abstract void displayRole();
 }

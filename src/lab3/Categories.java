@@ -27,52 +27,32 @@ public enum Categories {
         return description;
     }
 
-    public static void scan() {
+    public static Categories scan() {
         Scanner scanner = new Scanner(System.in);
         Categories[] values = Categories.values();
+
         for (Categories category : values) {
             System.out.println(category.ordinal() + " - " + category.name());
         }
+
         System.out.println("Enter Category: ");
-        while (!scanner.hasNextInt()) {
-            System.out.println("That's not a number! Please enter a valid Category:");
-            scanner.next();
-        }
-        int inputCategory = scanner.nextInt();
-        Categories selectedCategory;
-        switch (inputCategory) {
-            case 0:
-                selectedCategory = Categories.LIPSTICK;
+        int inputCategory = -1;
+
+        while (true) {
+            while (!scanner.hasNextInt()) {
+                System.out.println("That's not a number! Please enter a valid Category:");
+                scanner.next();
+            }
+            inputCategory = scanner.nextInt();
+            if (inputCategory >= 0 && inputCategory < values.length) {
                 break;
-            case 1:
-                selectedCategory = Categories.EYE_SHADOW;
-                break;
-            case 2:
-                selectedCategory = Categories.SHAMPOO;
-                break;
-            case 3:
-                selectedCategory = Categories.STYLING_GEL;
-                break;
-            case 4:
-                selectedCategory = Categories.NAIL_FILE;
-                break;
-            case 5:
-                selectedCategory = Categories.NAIL_POLISH;
-                break;
-            case 6:
-                selectedCategory = Categories.HAIR_TONIC;
-                break;
-            case 7:
-                selectedCategory = Categories.CUTICLE_OIL;
-                break;
-            case 8:
-                selectedCategory = Categories.FOOT_SCRUB;
-                break;
-            default:
+            } else {
                 System.out.println("Invalid choice! Please try again.");
-                scan();
-                return;
+            }
         }
+
+        Categories selectedCategory = values[inputCategory];
         System.out.println("Selected Category: " + selectedCategory);
+        return selectedCategory;
     }
 }

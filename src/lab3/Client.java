@@ -7,6 +7,7 @@ public class Client extends Person{
     }
 
     public Client() {
+        super();
     }
 
     @Override
@@ -16,5 +17,9 @@ public class Client extends Person{
 
     public void scan(){
         super.scan();
+    }
+    @Override
+    public void displayRole() {
+        System.out.println("Role: Client");
     }
 }
