@@ -3,7 +3,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+//формат даты
 public class Record {
     private LocalDateTime dateTime;
     private double price;

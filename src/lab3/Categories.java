@@ -1,6 +1,6 @@
 package lab3;
 import java.util.Scanner;
-
+//описание придумать другое.
 public enum Categories {
     LIPSTICK("Lipstick"),
     EYE_SHADOW("Eye Shadow"),
@@ -51,8 +51,6 @@ public enum Categories {
             }
         }
 
-        Categories selectedCategory = values[inputCategory];
-        System.out.println("Selected Category: " + selectedCategory);
-        return selectedCategory;
+        return values[inputCategory];
     }
 }

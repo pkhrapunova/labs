@@ -1,6 +1,6 @@
 package lab3;
 import java.util.Scanner;
-
+//конструктор по умолчанию??? абстрактный метод.
 public class Master extends Person {
     private String post;
 

@@ -1,6 +1,6 @@
 package lab3;
 import java.util.Scanner;
-
+//проверку на номер телефона??
 public abstract class Person {
     private String lastName;
     private String firstName;
