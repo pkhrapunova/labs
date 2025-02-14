@@ -1,4 +1,5 @@
 package lab3;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,23 +58,46 @@ public class Record {
 
     @Override
     public String toString() {
-        return "DateTime=" + dateTime +
-                ", price=" + price +
-                ", master=" + master.toString() +
-                ", client=" + client.toString();
+        return "    DateTime: " + dateTime +
+                ";\n    Price: " + price +
+                "$;\nMaster:" + master.toString() +
+                ";\nClient:" + client.toString();
     }
 
     public void scan(){
         Scanner input = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
-        String dateTimeStr = input.nextLine();
-        this.setDateTime(LocalDateTime.parse(dateTimeStr, formatter));
+        LocalDateTime dateTime;
+        while (true) {
+            System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
+            String dateTimeStr = input.nextLine();
+            try {
+                dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date and time format. Please enter the date and time in the format yyyy-MM-dd HH:mm.");
+            }
+        }
+        this.setDateTime(dateTime);
 
-        System.out.println("Enter price:");
-        this.setPrice(input.nextDouble());
-        input.nextLine();
+        double price;
+        while (true) {
+            System.out.println("Enter price:");
+            if (input.hasNextDouble()) {
+                price = input.nextDouble();
+                if (price < 0) {
+                    System.out.println("Цена не может быть отрицательной. Please enter a valid price.");
+                } else {
+                    input.nextLine();
+                    break;
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number for price.");
+                input.next();
+            }
+        }
+        this.setPrice(price);
 
         System.out.println("Enter master details:");
         this.master.scan();
@@ -81,4 +105,7 @@ public class Record {
         System.out.println("Enter client details:");
         this.client.scan();
     }
+
+
+
 }

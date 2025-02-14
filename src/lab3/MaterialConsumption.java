@@ -44,16 +44,32 @@ public class MaterialConsumption {
 
     @Override
     public String toString() {
-        return "count=" + count +
-                ", material=" + material +
-                ", record=" + record;
+        return "MaterialConsumption\nCount: " + count +
+                ";\nMaterial: \n" + material +
+                ";\nRecord: \n" + record;
     }
 
     public void scan(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter count:");
-        this.setCount(input.nextInt());
-        input.nextLine();
+
+        int count;
+        while (true) {
+            System.out.println("Enter count:");
+            if (input.hasNextInt()) {
+                count = input.nextInt();
+                if (count < 0) {
+                    System.out.println("Count cannot be negative. Please enter a valid integer.");
+                    input.nextLine();
+                } else {
+                    input.nextLine();
+                    break;
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                input.next();
+            }
+        }
+        this.setCount(count);
 
         System.out.println("Enter material details:");
         this.material.scan();
@@ -61,4 +77,6 @@ public class MaterialConsumption {
         System.out.println("Enter record details:");
         this.record.scan();
     }
+
+
 }

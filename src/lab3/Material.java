@@ -45,20 +45,38 @@ public class Material {
 
     @Override
     public String toString() {
-        return "name='" + name + '\'' +
-                ", cost=" + cost +
-                ", categories=" + (categories != null ? categories.toString() : "None");
+        return "    Name: '" + name + '\'' +
+                ";\n    Cost: " + cost +
+                "$;\n    Categories: " + (categories != null ? categories.toString() : "None");
     }
 
     public void scan() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter name:");
         this.setName(input.nextLine());
-        System.out.println("Enter cost:");
-        this.setCost(input.nextDouble());
-        input.nextLine();
+
+        double cost;
+        while (true) {
+            System.out.println("Enter cost:");
+            if (input.hasNextDouble()) {
+                cost = input.nextDouble();
+                if (cost < 0) {
+                    System.out.println("Cost cannot be negative. Please enter a valid number for cost.");
+                    input.nextLine();
+                } else {
+                    input.nextLine();
+                    break;
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a valid number for cost.");
+                input.next();
+            }
+        }
+        this.setCost(cost);
 
         System.out.println("Select a category:");
         this.categories = Categories.scan();
     }
+
+
 }

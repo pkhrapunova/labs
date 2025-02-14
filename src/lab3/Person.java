@@ -42,9 +42,10 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "LastName= " + lastName +
-                ", firstName= " + firstName +
-                ", numberPhone= " + numberPhone;
+        return "\n    LastName: " + lastName +
+                ";\n    FirstName: " + firstName +
+                ";\n    NumberPhone: " + numberPhone +
+                ";";
     }
     public void scan(){
         Scanner input = new Scanner(System.in);

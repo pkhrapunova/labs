@@ -24,7 +24,7 @@ public enum Categories {
 
     @Override
     public String toString() {
-        return description;
+        return name() + " (" + description + ")";
     }
 
     public static Categories scan() {

@@ -24,7 +24,7 @@ public class Master extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + ", post='" + post + '\'';
+        return super.toString() + "\n    Post: " + post;
     }
 
     @Override
