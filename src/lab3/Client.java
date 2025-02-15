@@ -1,5 +1,5 @@
 package lab3;
-//придумать как использовать абстрактный метод. конструктор по умолчанию???
+
 public class Client extends Person{
     public Client(String firstName, String lastName, String numberPhone) {
         super(firstName, lastName, numberPhone);
@@ -17,7 +17,7 @@ public class Client extends Person{
         super.scan();
     }
     @Override
-    public void displayRole() {
-        System.out.println("Role: Client");
+    public  boolean telephone(String phoneNumber) {
+        return phoneNumber.matches("[+]?[0-9]{0,13}");
     }
 }

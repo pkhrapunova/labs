@@ -1,16 +1,16 @@
 package lab3;
 import java.util.Scanner;
-//описание придумать другое.
+
 public enum Categories {
-    LIPSTICK("Lipstick"),
-    EYE_SHADOW("Eye Shadow"),
-    SHAMPOO("Shampoo"),
-    STYLING_GEL("Styling Gel"),
-    NAIL_FILE("Nail File"),
-    NAIL_POLISH("Nail Polish"),
-    HAIR_TONIC("Hair Tonic"),
-    CUTICLE_OIL("Cuticle Oil"),
-    FOOT_SCRUB("Foot Scrub");
+    LIPSTICK("Luxurious Lipstick"),
+    EYE_SHADOW("Vibrant Eye Shadow"),
+    SHAMPOO("Silky Shampoo"),
+    STYLING_GEL("Ultimate Styling Gel"),
+    NAIL_FILE("Precision Nail File"),
+    NAIL_POLISH("Glossy Nail Polish"),
+    HAIR_TONIC("Revitalizing Hair Tonic"),
+    CUTICLE_OIL("Nourishing Cuticle Oil"),
+    FOOT_SCRUB("Exfoliating Foot Scrub");
 
     private final String description;
 
@@ -50,7 +50,6 @@ public enum Categories {
                 System.out.println("Invalid choice! Please try again.");
             }
         }
-
         return values[inputCategory];
     }
 }

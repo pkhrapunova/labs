@@ -1,6 +1,5 @@
 package lab3;
 import java.util.Scanner;
-//конструктор по умолчанию??? абстрактный метод.
 public class Master extends Person {
     private String post;
 
@@ -35,7 +34,7 @@ public class Master extends Person {
         this.setPost(input.nextLine());
     }
     @Override
-    public void displayRole() {
-        System.out.println("Role: Master");
+    public  boolean telephone(String phoneNumber) {
+        return phoneNumber.matches("[+]?[0-9]{0,13}");
     }
 }

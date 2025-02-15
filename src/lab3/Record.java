@@ -3,7 +3,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-//формат даты
+
 public class Record {
     private LocalDateTime dateTime;
     private double price;
@@ -87,7 +87,7 @@ public class Record {
             if (input.hasNextDouble()) {
                 price = input.nextDouble();
                 if (price < 0) {
-                    System.out.println("Цена не может быть отрицательной. Please enter a valid price.");
+                    System.out.println("Please enter a valid price.");
                 } else {
                     input.nextLine();
                     break;

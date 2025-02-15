@@ -1,6 +1,6 @@
 package lab3;
 import java.util.Scanner;
-//проверку на номер телефона??
+
 public abstract class Person {
     private String lastName;
     private String firstName;
@@ -47,14 +47,23 @@ public abstract class Person {
                 ";\n    NumberPhone: " + numberPhone +
                 ";";
     }
-    public void scan(){
+    public void scan() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter first name");
+        System.out.println("Enter first name:");
         this.setFirstName(input.nextLine());
-        System.out.println("Enter last name");
+        System.out.println("Enter last name:");
         this.setLastName(input.nextLine());
-        System.out.println("Enter number phone");
-        this.setNumberPhone(input.nextLine());
+        boolean flag = false;
+        while (!flag) {
+            System.out.println("Enter phone number:");
+            String phoneNumber = input.nextLine();
+            flag = telephone(phoneNumber);
+            if (flag) {
+                this.setNumberPhone(phoneNumber);
+            } else {
+                System.out.println("The phone number was entered incorrectly.\n");
+            }
+        }
     }
-    public abstract void displayRole();
+    public abstract boolean telephone(String phoneNumber);
 }
