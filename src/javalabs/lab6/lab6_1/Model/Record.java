@@ -1,4 +1,5 @@
-package javalabs.lab6.lab6_1;
+package javalabs.lab6.lab6_1.Model;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;

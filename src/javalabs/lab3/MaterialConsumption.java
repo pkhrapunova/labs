@@ -51,7 +51,7 @@ public class MaterialConsumption {
 
     public void scan(){
         Scanner input = new Scanner(System.in);
-
+        System.out.println("Enter MaterialConsumption...");
         int count;
         while (true) {
             System.out.println("Enter count:");

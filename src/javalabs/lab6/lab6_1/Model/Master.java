@@ -1,4 +1,5 @@
-package javalabs.lab6.lab6_1;
+package javalabs.lab6.lab6_1.Model;
+
 import java.util.Scanner;
 public class Master extends Person {
     private String post;

@@ -1,6 +1,6 @@
-package javalabs.lab6.lab6_1;
+package javalabs.lab6.lab6_1.Model;
 
-public class Client extends Person{
+public class Client extends Person {
     public Client(String firstName, String lastName, String numberPhone) {
         super(firstName, lastName, numberPhone);
     }

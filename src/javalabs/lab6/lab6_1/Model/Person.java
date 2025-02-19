@@ -1,4 +1,4 @@
-package javalabs.lab6.lab6_1;
+package javalabs.lab6.lab6_1.Model;
 import java.util.Scanner;
 
 public abstract class Person {
