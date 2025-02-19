@@ -1,4 +1,4 @@
-package lab3;
+package javalabs.lab3;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;

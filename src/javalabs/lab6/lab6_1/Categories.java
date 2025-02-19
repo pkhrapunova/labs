@@ -1,4 +1,4 @@
-package lab3;
+package javalabs.lab6.lab6_1;
 import java.util.Scanner;
 
 public enum Categories {

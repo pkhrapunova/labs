@@ -1,4 +1,4 @@
-package lab3;
+package javalabs.lab3;
 import java.util.Scanner;
 public class Master extends Person {
     private String post;

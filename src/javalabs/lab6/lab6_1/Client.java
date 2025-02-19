@@ -1,4 +1,4 @@
-package lab3;
+package javalabs.lab6.lab6_1;
 
 public class Client extends Person{
     public Client(String firstName, String lastName, String numberPhone) {
