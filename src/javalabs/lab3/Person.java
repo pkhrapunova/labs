@@ -43,8 +43,8 @@ public abstract class Person {
     @Override
     public String toString() {
         return "\n    LastName: " + lastName +
-                ";\n    FirstName: " + firstName +
-                ";\n    NumberPhone: " + numberPhone +
+                "; FirstName: " + firstName +
+                "; NumberPhone: " + numberPhone +
                 ";";
     }
     public void scan() {

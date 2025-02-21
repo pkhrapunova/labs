@@ -13,6 +13,7 @@ public class Client extends Person {
     public String toString() {
         return super.toString();
     }
+
     public void scan(){
         super.scan();
     }

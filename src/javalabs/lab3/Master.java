@@ -23,7 +23,7 @@ public class Master extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + "\n    Post: " + post;
+        return super.toString() + " Post: " + post;
     }
 
     @Override

@@ -1,13 +1,14 @@
 package javalabs.lab6.lab6_1.Model;
+import javalabs.lab3.Categories;
 
 import java.util.Scanner;
 
 public class Material {
     private String name;
     private double cost;
-    private Categories categories;
+    private javalabs.lab3.Categories categories;
 
-    public Material(String name, double cost, Categories categories) {
+    public Material(String name, double cost, javalabs.lab3.Categories categories) {
         this.name = name;
         this.cost = cost;
         this.categories = categories;
@@ -27,11 +28,11 @@ public class Material {
         this.name = name;
     }
 
-    public Categories getCategories() {
+    public javalabs.lab3.Categories getCategories() {
         return categories;
     }
 
-    public void setCategories(Categories categories) {
+    public void setCategories(javalabs.lab3.Categories categories) {
         this.categories = categories;
     }
 
@@ -45,9 +46,9 @@ public class Material {
 
     @Override
     public String toString() {
-        return "    Name: '" + name + '\'' +
-                ";\n    Cost: " + cost +
-                "$;\n    Categories: " + (categories != null ? categories.toString() : "None");
+        return " Name: '" + name + '\'' +
+                "; Cost: " + cost +
+                "$; Categories: " + (categories != null ? categories.toString() : "None");
     }
 
     public void scan() {

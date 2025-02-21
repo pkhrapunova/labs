@@ -1,5 +1,8 @@
 package javalabs.lab6.lab6_1.Model;
 
+import javalabs.lab3.Client;
+import javalabs.lab3.Master;
+
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
@@ -8,10 +11,10 @@ import java.time.format.DateTimeFormatter;
 public class Record {
     private LocalDateTime dateTime;
     private double price;
-    private Master master;
-    private Client client;
+    private javalabs.lab3.Master master;
+    private javalabs.lab3.Client client;
 
-    public Record(LocalDateTime dateTime, double price, Master master, Client client) {
+    public Record(LocalDateTime dateTime, double price, javalabs.lab3.Master master, javalabs.lab3.Client client) {
         this.dateTime = dateTime;
         this.price = price;
         this.master = master;
@@ -21,8 +24,8 @@ public class Record {
     public Record() {
         this.dateTime = LocalDateTime.now();
         this.price = 0.0;
-        this.master = new Master();
-        this.client = new Client();
+        this.master = new javalabs.lab3.Master();
+        this.client = new javalabs.lab3.Client();
     }
 
     public LocalDateTime getDateTime() {
@@ -41,7 +44,7 @@ public class Record {
         this.price = price;
     }
 
-    public Master getMaster() {
+    public javalabs.lab3.Master getMaster() {
         return master;
     }
 
@@ -49,7 +52,7 @@ public class Record {
         this.master = master;
     }
 
-    public Client getClient() {
+    public javalabs.lab3.Client getClient() {
         return client;
     }
 
@@ -59,11 +62,13 @@ public class Record {
 
     @Override
     public String toString() {
-        return "    DateTime: " + dateTime +
-                ";\n    Price: " + price +
-                "$;\nMaster:" + master.toString() +
-                ";\nClient:" + client.toString();
+        return "DateTime: " + dateTime +
+                "; Price: " + price +
+                "$; \nMaster: " + master.toString() +
+                "; \nClient: " + client.toString();
     }
+
+
 
     public void scan(){
         Scanner input = new Scanner(System.in);

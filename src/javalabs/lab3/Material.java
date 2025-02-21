@@ -45,8 +45,8 @@ public class Material {
     @Override
     public String toString() {
         return "    Name: '" + name + '\'' +
-                ";\n    Cost: " + cost +
-                "$;\n    Categories: " + (categories != null ? categories.toString() : "None");
+                "; Cost: " + cost +
+                "$; Categories: " + (categories != null ? categories.toString() : "None");
     }
 
     public void scan() {

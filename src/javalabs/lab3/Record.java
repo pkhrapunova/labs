@@ -59,9 +59,9 @@ public class Record {
     @Override
     public String toString() {
         return "    DateTime: " + dateTime +
-                ";\n    Price: " + price +
-                "$;\nMaster:" + master.toString() +
-                ";\nClient:" + client.toString();
+                "; Price: " + price +
+                "$; \nMaster:" + master.toString() +
+                "; \nClient:" + client.toString();
     }
 
     public void scan(){
