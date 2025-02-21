@@ -11,7 +11,7 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Client: " + super.toString();
     }
 
     public void scan(){
