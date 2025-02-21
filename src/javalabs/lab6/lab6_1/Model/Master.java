@@ -23,6 +23,7 @@ public class Master extends Person {
     }
 
     @Override
+
     public String toString() {
         return "Master: " + super.toString() + " Post: " + post + ";";
     }

@@ -1,7 +1,7 @@
 package javalabs.lab6.lab6_1.Model;
 import java.util.Scanner;
 
-public abstract class Person {
+public abstract class Person  {
     private String lastName;
     private String firstName;
     private String numberPhone;
