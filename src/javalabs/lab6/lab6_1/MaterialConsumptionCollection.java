@@ -1,5 +1,6 @@
 package javalabs.lab6.lab6_1;
 import javalabs.lab6.lab6_1.Model.MaterialConsumption;
+
 public class MaterialConsumptionCollection {
     private MaterialConsumption[] items;
     private int count;
