@@ -5,8 +5,5 @@ public class Main {
         Collection<Object> collection = new Collection<>();
         CollectionController<Object> controller = new CollectionController<>(collection);
         controller.run();
-            }
-        }
-
     }
 }
