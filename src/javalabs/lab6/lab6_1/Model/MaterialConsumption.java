@@ -45,9 +45,9 @@ public class MaterialConsumption {
 
     @Override
     public String toString() {
-        return "MaterialConsumption\nCount: " + count +
-                ";\nMaterial: " + material +
-                ";\nRecord: " + record;
+        return "MaterialConsumption ---> Count: " + count +
+                "; Material: " + material +
+                "; Record: " + record;
     }
 
     public void scan(){

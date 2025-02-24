@@ -60,8 +60,8 @@ public class Record {
     @Override
     public String toString() {
         return "DateTime: " + dateTime +
-                "; Price: " + price + "$; \n" +
-                master.toString() + " \n" +
+                "; Price: " + price + "$; " +
+                master.toString() + " " +
                 client.toString();
     }
 

@@ -40,7 +40,7 @@ public class MaterialConsumptionCollection {
             throw new CustomException("There are no items in the collection");
         }
         for (int i = 0; i < count; i++) {
-            System.out.println(i + ": " + items[i]);
+            System.out.println(i + ": \n" + items[i]);
         }
     }
 }
