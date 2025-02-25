@@ -45,7 +45,7 @@ public class Material {
 
     @Override
     public String toString() {
-        return " Name: '" + name + '\'' +
+        return "Material: Name: '" + name + '\'' +
                 "; Cost: " + cost +
                 "$; Categories: " + (categories != null ? categories.toString() : "None");
     }

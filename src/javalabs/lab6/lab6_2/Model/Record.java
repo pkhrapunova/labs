@@ -59,7 +59,7 @@ public class Record {
 
     @Override
     public String toString() {
-        return "DateTime: " + dateTime +
+        return "Record: DateTime: " + dateTime +
                 "; Price: " + price + "$; " +
                 master.toString() + " " +
                 client.toString();

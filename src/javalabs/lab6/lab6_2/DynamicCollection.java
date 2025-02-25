@@ -2,12 +2,12 @@ package javalabs.lab6.lab6_2;
 
 import java.util.Arrays;
 
-public class DynamicArray<T> {
+public class DynamicCollection<T> {
     private Object[] elements;
     private int size;
     private static final int INITIAL_CAPACITY = 10;
 
-    public DynamicArray() {
+    public DynamicCollection() {
         this.elements = new Object[INITIAL_CAPACITY];
         this.size = 0;
     }
