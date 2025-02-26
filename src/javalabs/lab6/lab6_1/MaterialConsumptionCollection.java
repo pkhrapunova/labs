@@ -44,6 +44,8 @@ public class MaterialConsumptionCollection {
             System.out.println(i + ": \n" + items[i]);
         }
     }
+
+    public boolean isEmpty() {
+        return count == 0;
+    }
 }
-
-

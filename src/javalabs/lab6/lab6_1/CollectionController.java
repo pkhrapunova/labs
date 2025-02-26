@@ -51,6 +51,10 @@ public class CollectionController {
     }
 
     private void updateElement() throws CustomException {
+        if (collection.isEmpty()) {
+            throw new CustomException("The collection is empty, nothing to update.");
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the index to update: ");
         int index = Integer.parseInt(scanner.nextLine());
@@ -60,6 +64,10 @@ public class CollectionController {
     }
 
     private void deleteElement() throws CustomException {
+        if (collection.isEmpty()) {
+            throw new CustomException("Error: The collection is empty, nothing to delete.");
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the index to delete: ");
         int index = Integer.parseInt(scanner.nextLine());
