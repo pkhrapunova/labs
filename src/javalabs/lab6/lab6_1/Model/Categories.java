@@ -10,8 +10,8 @@ public enum Categories {
     NAIL_POLISH("Glossy Nail Polish"),
     HAIR_TONIC("Revitalizing Hair Tonic"),
     CUTICLE_OIL("Nourishing Cuticle Oil"),
-    FOOT_SCRUB("Exfoliating Foot Scrub");
-
+    FOOT_SCRUB("Exfoliating Foot Scrub"),
+    DEFAULT("Noting");
     private final String description;
 
     Categories(String description) {

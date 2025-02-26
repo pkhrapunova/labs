@@ -16,7 +16,7 @@ public class Material {
     public Material() {
         this.name = "";
         this.cost = 0.0;
-        this.categories = null;
+        this.categories = Categories.DEFAULT;
     }
 
     public String getName() {
