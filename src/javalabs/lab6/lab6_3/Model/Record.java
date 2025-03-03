@@ -66,25 +66,6 @@ public class Record {
     /*1111-11-11 11:11*/
 
     public void scan(Scanner input) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        LocalDateTime dateTime;
-        while (true) {
-            input.skip(".*\n");
-            System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
-
-            // Считываем ввод пользователя
-            String dateTimeStr = input.nextLine();
-
-            try {
-                dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-                break; // Выход из цикла, если ввод корректен
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid date and time format. Please enter the date and time in the format yyyy-MM-dd HH:mm.");
-            }
-        }
-        this.setDateTime(dateTime);
-
         double price;
         while (true) {
             System.out.println("Enter price:");
@@ -102,7 +83,20 @@ public class Record {
             }
         }
         this.setPrice(price);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+        LocalDateTime dateTime;
+        while (true) {
+            System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
+            String dateTimeStr = input.nextLine();
+            try {
+                dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date and time format. Please enter the date and time in the format yyyy-MM-dd HH:mm.");
+            }
+        }
+        this.setDateTime(dateTime);
         System.out.println("Enter master details:");
         this.master.scan(input);
 
@@ -110,5 +104,20 @@ public class Record {
         this.client.scan(input);
     }
 
+    public static Record fromString(String str) {
+        // Пример строки: "Record: DateTime: 2023-10-01T12:00; Price: 75.0$; Master: LastName: Doe; FirstName: Jane; NumberPhone: +987654321; Post: Senior Stylist; Client: LastName: Smith; FirstName: John; NumberPhone: +123456789;"
+        String[] parts = str.split("; ");
 
+        double price = Double.parseDouble(parts[1].replace("Price: ", "").replace("$", ""));
+        LocalDateTime dateTime = LocalDateTime.parse(parts[0].replace("Record: DateTime: ", ""));
+        // Восстановление Master
+        String masterStr = parts[2] + "; " + parts[3] + "; " + parts[4] + "; " + parts[5];
+        Master master = Master.fromString(masterStr);
+
+        // Восстановление Client
+        String clientStr = parts[6] + "; " + parts[7] + "; " + parts[8];
+        Client client = Client.fromString(clientStr);
+
+        return new Record(dateTime, price, master, client);
+    }
 }

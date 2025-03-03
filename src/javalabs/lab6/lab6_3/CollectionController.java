@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class CollectionController<T> {
-    private final FileCollection<T> collection; // Используем FileCollection
+    private final FileCollection<T> collection;
 
     public CollectionController(FileCollection<T> collection) {
         this.collection = collection;

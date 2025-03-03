@@ -1,6 +1,8 @@
 package javalabs.lab6.lab6_3;
 
 import java.io.*;
+import javalabs.lab6.lab6_3.Model.*;
+import javalabs.lab6.lab6_3.Model.Record;
 
 public class FileCollection<T> extends Collection<T> { // Наследуем Collection
 
@@ -16,13 +18,21 @@ public class FileCollection<T> extends Collection<T> { // Наследуем Col
         }
     }
 
-    // Метод для загрузки коллекции из текстового файла
     public void loadFromTextFile(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Логика для преобразования строки в объект типа T
-                add((T) line); // Добавляем строку в коллекцию
+                if (line.startsWith("MaterialConsumption")) {
+                    add((T) MaterialConsumption.fromString(line));
+                } else if (line.startsWith("Client")) {
+                    add((T) Client.fromString(line));
+                } else if (line.startsWith("Master")) {
+                    add((T) Master.fromString(line));
+                } else if (line.startsWith("Material")) {
+                    add((T) Material.fromString(line));
+                } else if (line.startsWith("Record")) {
+                    add((T) Record.fromString(line));
+                }
             }
             System.out.println("Collection loaded from " + filename);
         }
@@ -42,16 +52,23 @@ public class FileCollection<T> extends Collection<T> { // Наследуем Col
         }
     }
 
-    // Метод для загрузки коллекции из XML-файла
     public void loadFromXmlFile(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.trim().startsWith("<item>")) {
-                    // Извлекаем данные между тегами <item> и </item>
                     String itemData = line.trim().replace("<item>", "").replace("</item>", "");
-                    // Логика для преобразования строки в объект типа T
-                    add((T) itemData); // Добавляем строку в коллекцию
+                    if (itemData.startsWith("MaterialConsumption")) {
+                        add((T) MaterialConsumption.fromString(itemData));
+                    } else if (itemData.startsWith("Client")) {
+                        add((T) Client.fromString(itemData));
+                    } else if (itemData.startsWith("Master")) {
+                        add((T) Master.fromString(itemData));
+                    } else if (itemData.startsWith("Material")) {
+                        add((T) Material.fromString(itemData));
+                    } else if (itemData.startsWith("Record")) {
+                        add((T) Record.fromString(itemData));
+                    }
                 }
             }
             System.out.println("Collection loaded from " + filename);

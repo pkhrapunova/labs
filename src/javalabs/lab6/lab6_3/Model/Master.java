@@ -41,4 +41,15 @@ public class Master extends Person {
     public boolean telephone(String phoneNumber) {
         return phoneNumber.matches("[+]?[0-9]{0,13}");
     }
+
+    public static Master fromString(String str) {
+        // Пример строки: "Master: LastName: Doe; FirstName: Jane; NumberPhone: +987654321; Post: Senior Stylist;"
+        String[] parts = str.split("; ");
+        String lastName = parts[0].replace("Master: LastName: ", "");
+        String firstName = parts[1].replace("FirstName: ", "");
+        String numberPhone = parts[2].replace("NumberPhone: ", "");
+        String post = parts[3].replace("Post: ", "");
+
+        return new Master(firstName, lastName, numberPhone, post);
+    }
 }

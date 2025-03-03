@@ -75,6 +75,14 @@ public class Material {
         System.out.println("Select a category:");
         this.categories = Categories.scan(input);
     }
+    public static Material fromString(String str) {
+        // Пример строки: "Material: Name: 'Shampoo'; Cost: 15.0$; Categories: SHAMPOO (Silky Shampoo);"
+        String[] parts = str.split("; ");
+        String name = parts[0].replace("Material: Name: '", "").replace("'", "");
+        double cost = Double.parseDouble(parts[1].replace("Cost: ", "").replace("$", ""));
+        Categories categories = Categories.valueOf(parts[2].replace("Categories: ", "").split(" ")[0]);
 
+        return new Material(name, cost, categories);
+    }
 
 }

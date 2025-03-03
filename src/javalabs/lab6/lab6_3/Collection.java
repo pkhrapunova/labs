@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Collection<T> extends DynamicCollection<T> {
 
     public Collection() {
-        super(); // Вызов конструктора DynamicCollection
+        super();
     }
 
     @SuppressWarnings("unchecked")
