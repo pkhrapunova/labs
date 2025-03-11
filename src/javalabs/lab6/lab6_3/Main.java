@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        FileCollection<Object> collection = new FileCollection<>(); // Используем FileCollection
-        CollectionController<Object> controller = new CollectionController<>(collection);
+
+        MaterialConsumptionModel  model = new MaterialConsumptionModel();
+        MaterialConsumptionView view = new MaterialConsumptionView();
+        CollectionController controller = new CollectionController(model, view);
 
         controller.run(scanner);
         scanner.close();

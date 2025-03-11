@@ -78,20 +78,6 @@ public class MaterialConsumption {
         this.record.scan(input);
     }
 
-    public static MaterialConsumption fromString(String str) {
-        // Пример строки: "MaterialConsumption: Count: 5; Material: Name: 'Shampoo'; Cost: 15.0$; Categories: SHAMPOO (Silky Shampoo); Record: DateTime: 2023-10-01T12:00; Price: 75.0$; Master: LastName: Doe; FirstName: Jane; NumberPhone: +987654321; Post: Senior Stylist; Client: LastName: Smith; FirstName: John; NumberPhone: +123456789;"
-        String[] parts = str.split("; ");
-        int count = Integer.parseInt(parts[0].replace("MaterialConsumption: Count: ", ""));
 
-        // Восстановление Material
-        String materialStr = parts[1] + "; " + parts[2] + "; " + parts[3];
-        Material material = Material.fromString(materialStr);
-
-        // Восстановление Record
-        String recordStr = parts[4] + "; " + parts[5] + "; " + parts[6] + "; " + parts[7] + "; " + parts[8] + "; " + parts[9];
-        Record record = Record.fromString(recordStr);
-
-        return new MaterialConsumption(count, record, material);
-    }
 
 }

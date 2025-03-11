@@ -2,35 +2,35 @@ package javalabs.lab6.lab6_3.Model;
 
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Record {
-    private LocalDateTime dateTime;
+    private LocalDate date;
     private double price;
     private Master master;
     private Client client;
 
-    public Record(LocalDateTime dateTime, double price, Master master, Client client) {
-        this.dateTime = dateTime;
+    public Record(LocalDate date, double price, Master master, Client client) {
+        this.date = date;
         this.price = price;
         this.master = master;
         this.client = client;
     }
 
     public Record() {
-        this.dateTime = LocalDateTime.now();
+        this.date = LocalDate.now();
         this.price = 0.0;
         this.master = new Master();
         this.client = new Client();
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(LocalDate date) {
+        this.date = date;
     }
 
     public double getPrice() {
@@ -59,11 +59,11 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Record: DateTime: " + dateTime + "; Price: " + price + "$; " + master.toString() + " " + client.toString();
+        return "Record: Date: " + date+ "; Price: " + price + "$; " + master.toString() + " " + client.toString();
     }
 
 
-    /*1111-11-11 11:11*/
+    /*1111-11-11*/
 
     public void scan(Scanner input) {
         double price;
@@ -83,20 +83,20 @@ public class Record {
             }
         }
         this.setPrice(price);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        LocalDateTime dateTime;
+        LocalDate date;
         while (true) {
-            System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
-            String dateTimeStr = input.nextLine();
+            System.out.println("Enter date (yyyy-MM-dd):");
+            String dateStr = input.nextLine();
             try {
-                dateTime = LocalDateTime.parse(dateTimeStr, formatter);
+                date = LocalDate.parse(dateStr, dateFormatter);
                 break;
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date and time format. Please enter the date and time in the format yyyy-MM-dd HH:mm.");
+                System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
             }
         }
-        this.setDateTime(dateTime);
+        this.setDateTime(date);
         System.out.println("Enter master details:");
         this.master.scan(input);
 
@@ -104,20 +104,5 @@ public class Record {
         this.client.scan(input);
     }
 
-    public static Record fromString(String str) {
-        // Пример строки: "Record: DateTime: 2023-10-01T12:00; Price: 75.0$; Master: LastName: Doe; FirstName: Jane; NumberPhone: +987654321; Post: Senior Stylist; Client: LastName: Smith; FirstName: John; NumberPhone: +123456789;"
-        String[] parts = str.split("; ");
 
-        double price = Double.parseDouble(parts[1].replace("Price: ", "").replace("$", ""));
-        LocalDateTime dateTime = LocalDateTime.parse(parts[0].replace("Record: DateTime: ", ""));
-        // Восстановление Master
-        String masterStr = parts[2] + "; " + parts[3] + "; " + parts[4] + "; " + parts[5];
-        Master master = Master.fromString(masterStr);
-
-        // Восстановление Client
-        String clientStr = parts[6] + "; " + parts[7] + "; " + parts[8];
-        Client client = Client.fromString(clientStr);
-
-        return new Record(dateTime, price, master, client);
-    }
 }
