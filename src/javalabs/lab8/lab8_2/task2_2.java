@@ -1,0 +1,43 @@
+package javalabs.lab8.lab8_2;
+
+import javalabs.lab8.lab8_1.MyThread;
+
+public class task2_2 {
+    public static void main(String[] args) {
+        System.out.println("Главный поток начал работу");
+
+        int n = 10;
+
+        Thread thread1 = new Thread(new MyThread2(1,n));
+        Thread thread2 = new Thread(new MyThread2(2,n));
+        Thread thread3 = new Thread(new MyThread2(3,n));
+        Thread thread4 = new Thread(new MyThread2(4,n));
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        thread4.start();
+
+        try {
+            thread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        thread3.start();
+
+        try {
+            thread4.join();
+            thread3.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Главный поток закончил работу");
+    }
+}
