@@ -1,7 +1,5 @@
 package javalabs.lab8.lab8_2;
 
-import javalabs.lab8.lab8_1.MyThread;
-
 public class task2_2 {
     public static void main(String[] args) {
         System.out.println("Главный поток начал работу");
