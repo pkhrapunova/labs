@@ -10,7 +10,7 @@ public class MyThread extends Thread{
     public void run() {
         try {
             System.out.println("Поток " + id + " начал работу.");
-            Thread.sleep((int) (Math.random() * (5000 - 2000 + 1)));
+            Thread.sleep(1000);
             System.out.println("Поток " + id + " закончил работу.");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
