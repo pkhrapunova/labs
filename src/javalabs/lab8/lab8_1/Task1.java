@@ -1,13 +1,13 @@
-package javalabs.lab8.lab8_2;
+package javalabs.lab8.lab8_1;
 
-public class task2_1 {
+public class Task1 {
     public static void main(String[] args) {
         System.out.println("Главный поток начал работу");
-        int n = 10;
-        Thread thread1 = new Thread(new MyThread2(1,n));
-        Thread thread2 = new Thread(new MyThread2(2,n));
-        Thread thread3 = new Thread(new MyThread2(3,n));
-        Thread thread4 = new Thread(new MyThread2(4,n));
+
+        Thread thread1 = new Thread(new MyThread(1));
+        Thread thread2 = new Thread(new MyThread(2));
+        Thread thread3 = new Thread(new MyThread(3));
+        Thread thread4 = new Thread(new MyThread(4));
         thread1.start();
         thread2.start();
         thread3.start();

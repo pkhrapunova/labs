@@ -4,24 +4,15 @@ import java.util.Random;
 
 public class MyThread2 extends Thread{
     private final int id;
-    private final Thread[] dependencies;
     private final int n;
 
-    public MyThread2(int id,int n,Thread...dependencies) {
+    public MyThread2(int id,int n) {
         this.id = id;
-        this.dependencies = dependencies;
         this.n = n;
     }
     @Override
     public void run() {
         try {
-            if (dependencies != null) {
-                for (Thread dependency : dependencies) {
-                    if (dependency != null) {
-                        dependency.join();
-                    }
-                }
-            }
             int[] array = new int[n];
             Random rand = new Random();
             for (int i = 0; i < array.length; i++) {
