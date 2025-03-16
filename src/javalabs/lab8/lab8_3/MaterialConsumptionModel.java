@@ -33,9 +33,9 @@ public class MaterialConsumptionModel {
         return materialConsumptions.size();
     }
     public void saveToFile(String filename) throws CustomException {
-        if (materialConsumptions.size() == 0) { // Проверка на пустоту коллекции
+        if (materialConsumptions.size() == 0) {
             System.out.println("Коллекция пуста. Сохранение не требуется.");
-            return; // Выход из метода, если коллекция пуста
+            return;
         }
 
         try {

@@ -1,188 +1,91 @@
 package javalabs.lab8.lab8_3;
 
 import javalabs.lab8.lab8_3.Model.MaterialConsumption;
-
 import java.util.Random;
 
-public class CollectionController{
+public class CollectionController {
     private final MaterialConsumptionModel model;
     private final MaterialConsumptionView view;
+    private final int iterations;
 
-    public CollectionController(MaterialConsumptionModel model,MaterialConsumptionView view) {
+    public CollectionController(MaterialConsumptionModel model, MaterialConsumptionView view, int iterations) {
         this.model = model;
         this.view = view;
+        this.iterations = iterations;
     }
 
     public void run() {
-        int executionCount = 0; // Счетчик вызовов потоков
-        while (executionCount < 20) { // Ограничение на 10 вызовов
-            view.Menu();
-            int choice = view.choice();
-            System.out.println(choice);
+        for (int i = 0; i < iterations; i++) {
+            int action = view.choice();
+            String threadName = Thread.currentThread().getName();
             try {
-                switch (choice) {
-                    case 1:
-                        Thread addThread = new Thread(new AddTask(model));
-                        addThread.start();
-                        break;
-                    case 2:
-                        Thread updateThread = new Thread(new UpdateTask(model));
-                        updateThread.start();
-                        break;
-                    case 3:
-                        Thread deleteThread = new Thread(new DeleteTask(model));
-                        deleteThread.start();
-                        break;
-                    case 4:
-                        Thread printThread = new Thread(new PrintTask(model));
-                        printThread.start();
-                        break;
-                    case 5:
-                        Thread saveThread = new Thread(new SaveTask(model));
-                        saveThread.start();
-                        break;
-                    case 6:
-                        Thread loadThread = new Thread(new LoadTask(model));
-                        loadThread.start();
-                        break;
-                    case 0:
-                        return;
-                    default:
-                        System.out.println("Неверный ввод, попробуйте снова.");
-                        continue;
+                int index = new Random().nextInt(model.getSize() + 1);
+                switch (action) {
+                    case 0 -> addElement(threadName);
+                    case 1 -> updateElement(threadName, index);
+                    case 2 -> deleteElement(threadName, index);
+                    case 3 -> printAllElements(threadName);
+                    case 4 -> saveToFile(threadName);
+                    case 5 -> loadFromFile(threadName);
                 }
-                executionCount++; // Увеличиваем счетчик после каждого успешного вызова потока
-                System.out.println("Выполнено операций: " + executionCount + " из 10");
-            } catch (Exception e) {
+            } catch (CustomException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
         }
-        System.out.println("Программа завершена. Выполнено 10 операций.");
+        System.out.println(Thread.currentThread().getName() + " завершил работу.");
     }
 
-    private static class AddTask implements Runnable {
-        private final MaterialConsumptionModel model;
+    public void addElement(String threadName) throws CustomException {
+        MaterialConsumption item = DataGenerator.generateMaterialConsumption();
+        model.add(item);
+        System.out.println(threadName + " Добавлен элемент: " + item);
+    }
 
-        public AddTask(MaterialConsumptionModel model) {
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            MaterialConsumption item = DataGenerator.generateMaterialConsumption();
-            model.add(item);
-            System.out.println("Элемент добавлен: " + item);
+    public  void updateElement(String threadName, int index) throws CustomException {
+        if (model.getSize() > 0) {
+            MaterialConsumption updatedItem = DataGenerator.generateMaterialConsumption();
+            model.update(index, updatedItem);
+            System.out.println(threadName + " Обновлен элемент по индексу " + index + ": " + updatedItem);
+        } else {
+            System.out.println(threadName + " Коллекция пуста. Обновление невозможно.");
         }
     }
 
-    private static class UpdateTask implements Runnable {
-        private final MaterialConsumptionModel model;
-
-        public UpdateTask(MaterialConsumptionModel model) {
-            this.model = model;
+    public  void deleteElement(String threadName, int index) throws CustomException {
+        if (model.getSize() > 0) {
+            model.delete(index);
+            System.out.println(threadName + " Удален элемент по индексу " + index);
+        } else {
+            System.out.println(threadName + " Коллекция пуста. Удаление невозможно.");
         }
+    }
 
-        @Override
-        public void run() {
-            try {
-                if (model.getSize() == 0) {
-                    System.out.println("Коллекция пуста. Нечего обновлять.");
-                    return;
-                }
-
-                int index = new Random().nextInt(model.getSize()); // Случайный индекс
-                MaterialConsumption updatedItem = DataGenerator.generateMaterialConsumption();
-                model.update(index, updatedItem);
-                System.out.println("Элемент обновлен по индексу " + index + ": " + updatedItem);
-            } catch (CustomException e) {
-                System.out.println("Ошибка при обновлении: " + e.getMessage());
+    public  void printAllElements(String threadName) throws CustomException {
+        MaterialConsumption[] items = model.getAll();
+        if (items == null || items.length == 0) {
+            System.out.println(threadName + " Коллекция пуста.");
+        } else {
+            System.out.println(threadName + " Текущая коллекция:");
+            for (MaterialConsumption item : items) {
+                System.out.println(item.toString());
             }
         }
     }
 
-    private static class DeleteTask implements Runnable {
-        private final MaterialConsumptionModel model;
 
-        public DeleteTask(MaterialConsumptionModel model) {
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            try {
-                if (model.getSize() == 0) {
-                    System.out.println("Коллекция пуста. Нечего удалять.");
-                    return;
-                }
-
-                int index = new Random().nextInt(model.getSize());
-                model.delete(index);
-                System.out.println("Элемент удален по индексу: " + index);
-            } catch (CustomException e) {
-                System.out.println("Ошибка при удалении: " + e.getMessage());
-            }
+    public  void saveToFile(String threadName) throws CustomException {
+        if (model.getSize() > 0) {
+            String filename = "data_" + System.currentTimeMillis() + ".json";
+            model.saveToFile(filename);
+            System.out.println(threadName + " Данные сохранены в файл: " + filename);
+        } else {
+            System.out.println(threadName + " Коллекция пуста. Сохранение не требуется.");
         }
     }
 
-    private static class PrintTask implements Runnable {
-        private final MaterialConsumptionModel model;
 
-        public PrintTask(MaterialConsumptionModel model) {
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            try {
-                MaterialConsumption[] items = model.getAll();
-                if (items == null || items.length == 0) {
-                    System.out.println("Коллекция пуста.");
-                } else {
-                    System.out.println("Текущая коллекция:");
-                    for (MaterialConsumption item : items) {
-                        System.out.println(item);
-                    }
-                }
-            } catch (CustomException e) {
-                System.out.println("Ошибка при выводе коллекции: " + e.getMessage());
-            }
-        }
-    }
-
-    private static class SaveTask implements Runnable {
-        private final MaterialConsumptionModel model;
-
-        public SaveTask(MaterialConsumptionModel model) {
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            try {
-                String filename = "data_" + System.currentTimeMillis() + ".json";
-                model.saveToFile(filename);
-            } catch (CustomException e) {
-                System.out.println("Ошибка при сохранении: " + e.getMessage());
-            }
-        }
-    }
-
-    private static class LoadTask implements Runnable {
-        private final MaterialConsumptionModel model;
-
-        public LoadTask(MaterialConsumptionModel model) {
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            try {
-                String filename = "1.json"; // Имя файла для загрузки
-                model.loadFromFile(filename);
-                System.out.println("Коллекция загружена из файла: " + filename);
-            } catch (CustomException e) {
-                System.out.println("Ошибка при загрузке: " + e.getMessage());
-            }
-        }
+    public  void loadFromFile(String threadName) throws CustomException {
+        model.loadFromFile("1.json");
+        System.out.println(threadName + " Данные загружены из файла: " + "1.json");
     }
 }
