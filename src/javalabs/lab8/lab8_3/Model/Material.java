@@ -1,4 +1,4 @@
-package javalabs.lab6.lab6_1.Model;
+package javalabs.lab8.lab8_3.Model;
 
 import java.util.Scanner;
 
@@ -45,13 +45,12 @@ public class Material {
 
     @Override
     public String toString() {
-        return " Name: '" + name + '\'' +
+        return "Material: Name: '" + name + '\'' +
                 "; Cost: " + cost +
                 "$; Categories: " + (categories != null ? categories.toString() : "None");
     }
 
-    public void scan() {
-        Scanner input = new Scanner(System.in);
+    public void scan(Scanner input) {
         System.out.println("Enter name:");
         this.setName(input.nextLine());
 
@@ -60,23 +59,21 @@ public class Material {
             System.out.println("Enter cost:");
             if (input.hasNextDouble()) {
                 cost = input.nextDouble();
-                if (cost < 0) {
-                    System.out.println("Cost cannot be negative. Please enter a valid number for cost.");
-                    input.nextLine();
-                } else {
-                    input.nextLine();
+                if (cost >= 0) {
+                    //input.nextLine();
                     break;
+                } else {
+                    System.out.println("Cost cannot be negative. Please enter a valid number for cost.");
                 }
             } else {
                 System.out.println("Invalid input. Please enter a valid number for cost.");
-                input.next();
             }
+            input.nextLine();
         }
         this.setCost(cost);
 
         System.out.println("Select a category:");
-        this.categories = Categories.scan();
+        this.categories = Categories.scan(input);
     }
-
 
 }

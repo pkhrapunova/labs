@@ -1,6 +1,7 @@
-package javalabs.lab6.lab6_1.Model;
+package javalabs.lab8.lab8_3.Model;
 
 import java.util.Scanner;
+
 public class Master extends Person {
     private String post;
 
@@ -29,16 +30,16 @@ public class Master extends Person {
     }
 
 
-
     @Override
-    public void scan(){
-        super.scan();
-        Scanner input = new Scanner(System.in);
+    public void scan(Scanner input) {
+        super.scan(input);
         System.out.println("Enter post:");
         this.setPost(input.nextLine());
     }
+
     @Override
-    public  boolean telephone(String phoneNumber) {
+    public boolean telephone(String phoneNumber) {
         return phoneNumber.matches("[+]?[0-9]{0,13}");
     }
+
 }

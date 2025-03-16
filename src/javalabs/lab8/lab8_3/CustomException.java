@@ -1,4 +1,4 @@
-package javalabs.lab6.lab6_2;
+package javalabs.lab8.lab8_3;
 
 public class CustomException extends Exception {
     public CustomException(String message) {

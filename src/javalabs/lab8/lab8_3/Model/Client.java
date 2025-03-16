@@ -1,4 +1,6 @@
-package javalabs.lab6.lab6_2.Model;
+package javalabs.lab8.lab8_3.Model;
+
+import java.util.Scanner;
 
 public class Client extends Person {
     public Client(String firstName, String lastName, String numberPhone) {
@@ -14,11 +16,13 @@ public class Client extends Person {
         return "Client: " + super.toString();
     }
 
-    public void scan(){
-        super.scan();
+    public void scan(Scanner scanner) {
+        super.scan(scanner);
     }
+
     @Override
-    public  boolean telephone(String phoneNumber) {
+    public boolean telephone(String phoneNumber) {
         return phoneNumber.matches("[+]?[0-9]{0,13}");
     }
+
 }

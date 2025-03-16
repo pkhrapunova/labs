@@ -1,4 +1,5 @@
-package javalabs.lab6.lab6_1.Model;
+package javalabs.lab8.lab8_3.Model;
+
 import java.util.Scanner;
 
 public enum Categories {
@@ -12,6 +13,7 @@ public enum Categories {
     CUTICLE_OIL("Nourishing Cuticle Oil"),
     FOOT_SCRUB("Exfoliating Foot Scrub"),
     DEFAULT("Noting");
+
     private final String description;
 
     Categories(String description) {
@@ -27,8 +29,8 @@ public enum Categories {
         return name() + " (" + description + ")";
     }
 
-    public static Categories scan() {
-        Scanner scanner = new Scanner(System.in);
+    public static Categories scan(Scanner scanner) {
+
         Categories[] values = Categories.values();
 
         for (Categories category : values) {

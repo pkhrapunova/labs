@@ -1,7 +1,8 @@
-package javalabs.lab6.lab6_2.Model;
+package javalabs.lab8.lab8_3.Model;
+
 import java.util.Scanner;
 
-public abstract class Person  {
+public abstract class Person {
     private String lastName;
     private String firstName;
     private String numberPhone;
@@ -11,11 +12,13 @@ public abstract class Person  {
         this.lastName = lastName;
         this.numberPhone = numberPhone;
     }
+
     public Person() {
-        this.firstName ="";
+        this.firstName = "";
         this.lastName = "";
         this.numberPhone = "";
     }
+
     public String getLastName() {
         return lastName;
     }
@@ -47,8 +50,8 @@ public abstract class Person  {
                 "; NumberPhone: " + numberPhone +
                 ";";
     }
-    public void scan() {
-        Scanner input = new Scanner(System.in);
+
+    public void scan(Scanner input) {
         System.out.println("Enter first name:");
         this.setFirstName(input.nextLine());
         System.out.println("Enter last name:");
@@ -65,5 +68,6 @@ public abstract class Person  {
             }
         }
     }
+
     public abstract boolean telephone(String phoneNumber);
 }

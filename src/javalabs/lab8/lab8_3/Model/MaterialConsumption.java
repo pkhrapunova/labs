@@ -1,4 +1,4 @@
-package javalabs.lab6.lab6_1.Model;
+package javalabs.lab8.lab8_3.Model;
 
 import java.util.Scanner;
 
@@ -45,13 +45,12 @@ public class MaterialConsumption {
 
     @Override
     public String toString() {
-        return "MaterialConsumption ---> Count: " + count +
-                "; Material: " + material +
-                "; Record: " + record;
+        return "MaterialConsumption: Count: " + count +
+                "; " + material +
+                "; " + record;
     }
 
-    public void scan(){
-        Scanner input = new Scanner(System.in);
+    public void scan(Scanner input) {
         System.out.println("Enter MaterialConsumption...");
         int count;
         while (true) {
@@ -73,11 +72,12 @@ public class MaterialConsumption {
         this.setCount(count);
 
         System.out.println("Enter material details:");
-        this.material.scan();
+        this.material.scan(input);
 
         System.out.println("Enter record details:");
-        this.record.scan();
+        this.record.scan(input);
     }
+
 
 
 }

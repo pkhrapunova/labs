@@ -1,36 +1,36 @@
-package javalabs.lab6.lab6_2.Model;
+package javalabs.lab8.lab8_3.Model;
 
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Record {
-    private LocalDateTime dateTime;
+    private LocalDate date;
     private double price;
     private Master master;
     private Client client;
 
-    public Record(LocalDateTime dateTime, double price, Master master, Client client) {
-        this.dateTime = dateTime;
+    public Record(LocalDate date, double price, Master master, Client client) {
+        this.date = date;
         this.price = price;
         this.master = master;
         this.client = client;
     }
 
     public Record() {
-        this.dateTime = LocalDateTime.now();
+        this.date = LocalDate.now();
         this.price = 0.0;
         this.master = new Master();
         this.client = new Client();
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime(LocalDate date) {
+        this.date = date;
     }
 
     public double getPrice() {
@@ -59,32 +59,13 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Record: DateTime: " + dateTime +
-                "; Price: " + price + "$; " +
-                master.toString() + " " +
-                client.toString();
+        return "Record: Date: " + date+ "; Price: " + price + "$; " + master.toString() + " " + client.toString();
     }
 
 
-    /*1111-11-11 11:11*/
+    /*1111-11-11*/
 
-    public void scan(){
-        Scanner input = new Scanner(System.in);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        LocalDateTime dateTime;
-        while (true) {
-            System.out.println("Enter date and time (yyyy-MM-dd HH:mm):");
-            String dateTimeStr = input.nextLine();
-            try {
-                dateTime = LocalDateTime.parse(dateTimeStr, formatter);
-                break;
-            } catch (DateTimeParseException e) {
-                System.out.println("Invalid date and time format. Please enter the date and time in the format yyyy-MM-dd HH:mm.");
-            }
-        }
-        this.setDateTime(dateTime);
-
+    public void scan(Scanner input) {
         double price;
         while (true) {
             System.out.println("Enter price:");
@@ -102,14 +83,26 @@ public class Record {
             }
         }
         this.setPrice(price);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+        LocalDate date;
+        while (true) {
+            System.out.println("Enter date (yyyy-MM-dd):");
+            String dateStr = input.nextLine();
+            try {
+                date = LocalDate.parse(dateStr, dateFormatter);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
+            }
+        }
+        this.setDateTime(date);
         System.out.println("Enter master details:");
-        this.master.scan();
+        this.master.scan(input);
 
         System.out.println("Enter client details:");
-        this.client.scan();
+        this.client.scan(input);
     }
-
 
 
 }
