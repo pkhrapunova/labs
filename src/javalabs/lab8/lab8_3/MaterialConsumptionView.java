@@ -18,7 +18,7 @@ public class MaterialConsumptionView {
 //    }
 
     public int choice(){
-        return new Random().nextInt(6);
+        return new Random().nextInt(7);
     }
 
 }

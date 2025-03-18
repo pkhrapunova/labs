@@ -27,6 +27,7 @@ public class CollectionController {
                     case 3 -> printAllElements(threadName);
                     case 4 -> saveToFile(threadName);
                     case 5 -> loadFromFile(threadName);
+                    default -> System.out.println(threadName + " Incorrect input, try again.");
                 }
             } catch (CustomException e) {
                 System.out.println("Ошибка: " + e.getMessage());
@@ -38,20 +39,20 @@ public class CollectionController {
     public void addElement(String threadName) throws CustomException {
         MaterialConsumption item = DataGenerator.generateMaterialConsumption();
         model.add(item);
-        System.out.println(threadName + " Добавлен элемент: " + item);
+        System.out.println(threadName + " Добавлен элемент: " /*+ item*/);
     }
 
-    public  void updateElement(String threadName, int index) throws CustomException {
+    public void updateElement(String threadName, int index) throws CustomException {
         if (model.getSize() > 0) {
             MaterialConsumption updatedItem = DataGenerator.generateMaterialConsumption();
             model.update(index, updatedItem);
-            System.out.println(threadName + " Обновлен элемент по индексу " + index + ": " + updatedItem);
+            System.out.println(threadName + " Обновлен элемент по индексу " + index/* + ": " + updatedItem*/);
         } else {
             System.out.println(threadName + " Коллекция пуста. Обновление невозможно.");
         }
     }
 
-    public  void deleteElement(String threadName, int index) throws CustomException {
+    public void deleteElement(String threadName, int index) throws CustomException {
         if (model.getSize() > 0) {
             model.delete(index);
             System.out.println(threadName + " Удален элемент по индексу " + index);
@@ -60,7 +61,7 @@ public class CollectionController {
         }
     }
 
-    public  void printAllElements(String threadName) throws CustomException {
+    public void printAllElements(String threadName) throws CustomException {
         MaterialConsumption[] items = model.getAll();
         if (items == null || items.length == 0) {
             System.out.println(threadName + " Коллекция пуста.");
@@ -72,8 +73,7 @@ public class CollectionController {
         }
     }
 
-
-    public  void saveToFile(String threadName) throws CustomException {
+    public void saveToFile(String threadName) throws CustomException {
         if (model.getSize() > 0) {
             String filename = "data_" + System.currentTimeMillis() + ".json";
             model.saveToFile(filename);
@@ -83,8 +83,7 @@ public class CollectionController {
         }
     }
 
-
-    public  void loadFromFile(String threadName) throws CustomException {
+    public void loadFromFile(String threadName) throws CustomException {
         model.loadFromFile("1.json");
         System.out.println(threadName + " Данные загружены из файла: " + "1.json");
     }

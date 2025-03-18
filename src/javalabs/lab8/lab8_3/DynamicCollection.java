@@ -1,11 +1,13 @@
 package javalabs.lab8.lab8_3;
 
 import java.util.Arrays;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class DynamicCollection<T> {
     private Object[] elements;
     private int size;
     private static final int INITIAL_CAPACITY = 10;
+    private final ReentrantLock lock = new ReentrantLock();
 
     public DynamicCollection() {
         this.elements = new Object[INITIAL_CAPACITY];
@@ -16,41 +18,58 @@ public class DynamicCollection<T> {
         return size;
     }
 
-    public synchronized void add(T element) {
-        if (size == elements.length) {
-            increaseCapacity();
+    public void add(T element) {
+        lock.lock();
+        try {
+            if (size == elements.length) {
+                increaseCapacity();
+            }
+            elements[size++] = element;
+        } finally {
+            lock.unlock();
         }
-        elements[size++] = element;
     }
-    private synchronized void increaseCapacity() {
+
+    private void increaseCapacity() {
         int newCapacity = elements.length * 2;
         elements = Arrays.copyOf(elements, newCapacity);
     }
+
     @SuppressWarnings("unchecked")
-    public synchronized T get(int index) throws CustomException {
-        if (index >= 0 && index < size) {
-            return (T) elements[index];
+    public T get(int index) throws CustomException {
+        lock.lock();
+        try {
+            if (index >= 0 && index < size) {
+                return (T) elements[index];
+            }
+            throw new CustomException("Index out of range");
+        } finally {
+            lock.unlock();
         }
-        throw new CustomException("Index out of range");
     }
 
-    public synchronized void update(int index, T element) throws CustomException {
-        if (index < 0 || index >= size) {
-            throw new CustomException("Index out of bounds");
-        }
-        elements[index] = element;
-    }
-
-
-    public synchronized void delete(int index) throws CustomException {
+    public void update(int index, T element) throws CustomException {
+        lock.lock();
+        try {
             if (index < 0 || index >= size) {
                 throw new CustomException("Index out of bounds");
             }
-
-            System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        elements[--size] = null;
+            elements[index] = element;
+        } finally {
+            lock.unlock();
+        }
     }
-    
 
-
+    public void delete(int index) throws CustomException {
+        lock.lock();
+        try {
+            if (index < 0 || index >= size) {
+                throw new CustomException("Index out of bounds");
+            }
+            System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+            elements[--size] = null;
+        } finally {
+            lock.unlock();
+        }
+    }
 }

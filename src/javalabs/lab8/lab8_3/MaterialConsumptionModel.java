@@ -1,8 +1,8 @@
 package javalabs.lab8.lab8_3;
+
 import javalabs.lab8.lab8_3.Model.MaterialConsumption;
 
 import java.io.IOException;
-
 
 public class MaterialConsumptionModel {
     private final DynamicCollection<MaterialConsumption> materialConsumptions;
@@ -11,12 +11,14 @@ public class MaterialConsumptionModel {
         this.materialConsumptions = new DynamicCollection<>();
     }
 
-    public void add(MaterialConsumption materialConsumption){
+    public void add(MaterialConsumption materialConsumption) {
         materialConsumptions.add(materialConsumption);
     }
-    public void update(int index,MaterialConsumption materialConsumption ) throws CustomException {
-        materialConsumptions.update(index,materialConsumption);
+
+    public void update(int index, MaterialConsumption materialConsumption) throws CustomException {
+        materialConsumptions.update(index, materialConsumption);
     }
+
     public void delete(Integer index) throws CustomException {
         materialConsumptions.delete(index);
     }
@@ -32,9 +34,10 @@ public class MaterialConsumptionModel {
     public int getSize() {
         return materialConsumptions.size();
     }
+
     public void saveToFile(String filename) throws CustomException {
         if (materialConsumptions.size() == 0) {
-            System.out.println("Коллекция пуста. Сохранение не требуется.");
+            System.out.println("The collection is empty. Saving is not required.");
             return;
         }
 
@@ -44,9 +47,9 @@ public class MaterialConsumptionModel {
                 fileCollection.add(materialConsumptions.get(i));
             }
             fileCollection.saveToJsonFile(filename);
-            System.out.println("Коллекция сохранена в файл: " + filename);
+            System.out.println("The collection is saved to a file: " + filename);
         } catch (IOException e) {
-            throw new CustomException("Ошибка при сохранении файла: " + e.getMessage());
+            throw new CustomException("Error saving the file:" + e.getMessage());
         }
     }
 
@@ -59,7 +62,7 @@ public class MaterialConsumptionModel {
                 materialConsumptions.add(fileCollection.get(i));
             }
         } catch (IOException e) {
-            throw new CustomException("Ошибка при загрузке файла: " + e.getMessage());
+            throw new CustomException("Error when uploading a file:" + e.getMessage());
         }
     }
 }
