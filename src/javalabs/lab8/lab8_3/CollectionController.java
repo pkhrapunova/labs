@@ -75,7 +75,7 @@ public class CollectionController {
 
     public void saveToFile(String threadName) throws CustomException {
         if (model.getSize() > 0) {
-            String filename = "data_" + System.currentTimeMillis() + ".json";
+            String filename = "data_" + threadName + ".json";
             model.saveToFile(filename);
             System.out.println(threadName + " Данные сохранены в файл: " + filename);
         } else {
