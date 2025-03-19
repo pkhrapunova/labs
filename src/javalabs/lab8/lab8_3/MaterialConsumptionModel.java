@@ -47,7 +47,6 @@ public class MaterialConsumptionModel {
                 fileCollection.add(materialConsumptions.get(i));
             }
             fileCollection.saveToJsonFile(filename);
-            System.out.println("The collection is saved to a file: " + filename);
         } catch (IOException e) {
             throw new CustomException("Error saving the file:" + e.getMessage());
         }

@@ -2,18 +2,23 @@ package javalabs.lab8.lab8_3;
 
 import javalabs.lab8.lab8_3.Model.MaterialConsumption;
 import java.util.Random;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class CollectionController {
+public class CollectionController extends Thread {
+    private static final ReentrantLock consoleLock = new ReentrantLock();
+    private final ReentrantLock collectionLock;
     private final MaterialConsumptionModel model;
     private final MaterialConsumptionView view;
     private final int iterations;
 
-    public CollectionController(MaterialConsumptionModel model, MaterialConsumptionView view, int iterations) {
+    public CollectionController(MaterialConsumptionModel model, MaterialConsumptionView view, int iterations, ReentrantLock collectionLock) {
         this.model = model;
         this.view = view;
         this.iterations = iterations;
+        this.collectionLock = collectionLock;
     }
 
+    @Override
     public void run() {
         for (int i = 0; i < iterations; i++) {
             int action = view.choice();
@@ -27,64 +32,156 @@ public class CollectionController {
                     case 3 -> printAllElements(threadName);
                     case 4 -> saveToFile(threadName);
                     case 5 -> loadFromFile(threadName);
-                    default -> System.out.println(threadName + " Incorrect input, try again.");
+                    default -> {
+                        consoleLock.lock();
+                        try {
+                            System.out.println(threadName + " Incorrect input, try again.");
+                        } finally {
+                            consoleLock.unlock();
+                        }
+                    }
                 }
             } catch (CustomException e) {
-                System.out.println("Ошибка: " + e.getMessage());
+                consoleLock.lock();
+                try {
+                    System.out.println("Ошибка: " + e.getMessage());
+                } finally {
+                    consoleLock.unlock();
+                }
             }
         }
-        System.out.println(Thread.currentThread().getName() + " завершил работу.");
+        consoleLock.lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + " завершил работу.");
+        } finally {
+            consoleLock.unlock();
+        }
     }
 
     public void addElement(String threadName) throws CustomException {
-        MaterialConsumption item = DataGenerator.generateMaterialConsumption();
-        model.add(item);
-        System.out.println(threadName + " Добавлен элемент: " /*+ item*/);
+        collectionLock.lock();
+        try {
+            MaterialConsumption item = DataGenerator.generateMaterialConsumption();
+            model.add(item);
+            consoleLock.lock();
+            try {
+                System.out.println(threadName + " Добавлен элемент: " + item);
+            } finally {
+                consoleLock.unlock();
+            }
+        } finally {
+            collectionLock.unlock();
+        }
     }
 
     public void updateElement(String threadName, int index) throws CustomException {
-        if (model.getSize() > 0) {
-            MaterialConsumption updatedItem = DataGenerator.generateMaterialConsumption();
-            model.update(index, updatedItem);
-            System.out.println(threadName + " Обновлен элемент по индексу " + index/* + ": " + updatedItem*/);
-        } else {
-            System.out.println(threadName + " Коллекция пуста. Обновление невозможно.");
+        collectionLock.lock();
+        try {
+            if (model.getSize() > 0 && index >= 0 && index < model.getSize()) {
+                MaterialConsumption updatedItem = DataGenerator.generateMaterialConsumption();
+                model.update(index, updatedItem);
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Обновлен элемент по индексу " + index);
+                } finally {
+                    consoleLock.unlock();
+                }
+            } else {
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Некорректный индекс или коллекция пуста.");
+                } finally {
+                    consoleLock.unlock();
+                }
+            }
+        } finally {
+            collectionLock.unlock();
         }
     }
 
     public void deleteElement(String threadName, int index) throws CustomException {
-        if (model.getSize() > 0) {
-            model.delete(index);
-            System.out.println(threadName + " Удален элемент по индексу " + index);
-        } else {
-            System.out.println(threadName + " Коллекция пуста. Удаление невозможно.");
+        collectionLock.lock();
+        try {
+            if (model.getSize() > 0 && index >= 0 && index < model.getSize()) {
+                model.delete(index);
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Удален элемент по индексу " + index);
+                } finally {
+                    consoleLock.unlock();
+                }
+            } else {
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Некорректный индекс или коллекция пуста.");
+                } finally {
+                    consoleLock.unlock();
+                }
+            }
+        } finally {
+            collectionLock.unlock();
         }
     }
 
     public void printAllElements(String threadName) throws CustomException {
-        MaterialConsumption[] items = model.getAll();
-        if (items == null || items.length == 0) {
-            System.out.println(threadName + " Коллекция пуста.");
-        } else {
-            System.out.println(threadName + " Текущая коллекция:");
-            for (MaterialConsumption item : items) {
-                System.out.println(item.toString());
+        collectionLock.lock();
+        try {
+            MaterialConsumption[] items = model.getAll();
+            consoleLock.lock();
+            try {
+                if (items == null || items.length == 0) {
+                    System.out.println(threadName + " Коллекция пуста.");
+                } else {
+                    System.out.println(threadName + " Текущая коллекция:");
+                    for (MaterialConsumption item : items) {
+                        System.out.println(item.toString());
+                    }
+                }
+            } finally {
+                consoleLock.unlock();
             }
+        } finally {
+            collectionLock.unlock();
         }
     }
 
     public void saveToFile(String threadName) throws CustomException {
-        if (model.getSize() > 0) {
-            String filename = "data_" + threadName + ".json";
-            model.saveToFile(filename);
-            System.out.println(threadName + " Данные сохранены в файл: " + filename);
-        } else {
-            System.out.println(threadName + " Коллекция пуста. Сохранение не требуется.");
+        collectionLock.lock();
+        try {
+            if (model.getSize() > 0) {
+                String filename = "data_" + threadName + ".json";
+                model.saveToFile(filename);
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Данные сохранены в файл: " + filename);
+                } finally {
+                    consoleLock.unlock();
+                }
+            } else {
+                consoleLock.lock();
+                try {
+                    System.out.println(threadName + " Коллекция пуста. Сохранение не требуется.");
+                } finally {
+                    consoleLock.unlock();
+                }
+            }
+        } finally {
+            collectionLock.unlock();
         }
     }
 
     public void loadFromFile(String threadName) throws CustomException {
-        model.loadFromFile("1.json");
-        System.out.println(threadName + " Данные загружены из файла: " + "1.json");
+        collectionLock.lock();
+        try {
+            model.loadFromFile("1.json");
+            consoleLock.lock();
+            try {
+                System.out.println(threadName + " Данные загружены из файла: " + "1.json");
+            } finally {
+                consoleLock.unlock();
+            }
+        } finally {
+            collectionLock.unlock();
+        }
     }
 }
