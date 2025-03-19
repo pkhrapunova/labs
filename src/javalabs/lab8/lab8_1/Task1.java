@@ -4,10 +4,10 @@ public class Task1 {
     public static void main(String[] args) {
         System.out.println("Главный поток начал работу");
 
-        Thread thread1 = new Thread(new MyThread(1));
-        Thread thread2 = new Thread(new MyThread(2));
-        Thread thread3 = new Thread(new MyThread(3));
-        Thread thread4 = new Thread(new MyThread(4));
+        MyThread thread1 = new MyThread(1);
+        MyThread thread2 = new MyThread(2);
+        MyThread thread3 = new MyThread(3);
+        MyThread thread4 = new MyThread(4);
         thread1.start();
         thread2.start();
         thread3.start();

@@ -12,21 +12,16 @@ public class MyThread2 extends Thread{
     }
     @Override
     public void run() {
-        try {
-            int[] array = new int[n];
-            Random rand = new Random();
-            for (int i = 0; i < array.length; i++) {
-                array[i] = rand.nextInt(201) - 100;
-            }
-            int[] result = rearrangeArray(array);
-            System.out.println("Поток " + id + " начал работу.");
-            System.out.println("Поток " + id  +" Входной массив: "+ java.util.Arrays.toString(array));
-            System.out.println("Поток " + id  +" Выходной массив: "+ java.util.Arrays.toString(result));
-            Thread.sleep(1000);
-            System.out.println("Поток " + id + " закончил работу.");
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        int[] array = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < array.length; i++) {
+            array[i] = rand.nextInt(201) - 100;
         }
+        int[] result = rearrangeArray(array);
+        System.out.println("Поток " + id + " начал работу.");
+        System.out.println("Поток " + id  +" Входной массив: "+ java.util.Arrays.toString(array));
+        System.out.println("Поток " + id  +" Выходной массив: "+ java.util.Arrays.toString(result));
+        System.out.println("Поток " + id + " закончил работу.");
     }
 
     public static int[] rearrangeArray(int[] array) {
