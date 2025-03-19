@@ -82,7 +82,7 @@ public class CollectionController extends Thread {
                 model.update(index, updatedItem);
                 consoleLock.lock();
                 try {
-                    System.out.println(threadName + " Обновлен элемент по индексу " + index);
+                    System.out.println(threadName + " Обновлен элемент по индексу " + index+" :"+updatedItem);
                 } finally {
                     consoleLock.unlock();
                 }
@@ -113,7 +113,7 @@ public class CollectionController extends Thread {
             } else {
                 consoleLock.lock();
                 try {
-                    System.out.println(threadName + " Некорректный индекс или коллекция пуста.");
+                    System.out.println(threadName + " Некорректный индекс");
                 } finally {
                     consoleLock.unlock();
                 }
@@ -124,24 +124,26 @@ public class CollectionController extends Thread {
     }
 
     public void printAllElements(String threadName) throws CustomException {
+        MaterialConsumption[] items;
         collectionLock.lock();
         try {
-            MaterialConsumption[] items = model.getAll();
-            consoleLock.lock();
-            try {
-                if (items == null || items.length == 0) {
-                    System.out.println(threadName + " Коллекция пуста.");
-                } else {
-                    System.out.println(threadName + " Текущая коллекция:");
-                    for (MaterialConsumption item : items) {
-                        System.out.println(item.toString());
-                    }
-                }
-            } finally {
-                consoleLock.unlock();
-            }
+            items = model.getAll();
         } finally {
             collectionLock.unlock();
+        }
+
+        consoleLock.lock();
+        try {
+            if (items == null || items.length == 0) {
+                System.out.println(threadName + " Коллекция пуста.");
+            } else {
+                System.out.println(threadName + " Текущая коллекция:");
+                for (MaterialConsumption item : items) {
+                    System.out.println(item.toString());
+                }
+            }
+        } finally {
+            consoleLock.unlock();
         }
     }
 

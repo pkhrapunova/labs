@@ -10,7 +10,7 @@ public class Main {
         ReentrantLock collectionLock = new ReentrantLock();
 
         for (int i = 0; i < 10; i++) {
-            CollectionController controller = new CollectionController(model, view, 3, collectionLock);
+            CollectionController controller = new CollectionController(model, view, 6, collectionLock);
             controller.start();
         }
     }
