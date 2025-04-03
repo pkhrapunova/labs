@@ -1,0 +1,29 @@
+[
+  {
+    "count": 1,
+    "material": {
+      "name": "1",
+      "cost": 1.0,
+      "categories": "EYE_SHADOW"
+    },
+    "record": {
+      "date": {
+        "year": 1111,
+        "month": 11,
+        "day": 11
+      },
+      "price": 1.0,
+      "master": {
+        "post": "1",
+        "lastName": "1",
+        "firstName": "1",
+        "numberPhone": "1"
+      },
+      "client": {
+        "lastName": "1",
+        "firstName": "1",
+        "numberPhone": "1"
+      }
+    }
+  }
+]
