@@ -2,7 +2,7 @@ package javalabs.lab7;
 
 import javax.swing.*;
 
-
+//--add-opens java.base/java.time=ALL-UNNAMED
 public class mainForm {
 
     private JPanel panel1;
