@@ -2,6 +2,22 @@ package javalabs.lab7;
 
 import javax.swing.*;
 
+
 public class mainForm {
-    private JButton btn_add;
-}
+
+    private JPanel panel1;
+
+    public static void main(String[] args) {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            SwingUtilities.invokeLater(() -> {
+                MaterialConsumptionModel model = new MaterialConsumptionModel();
+                MaterialConsumptionView view = new MaterialConsumptionView();
+                new CollectionController(model, view);
+                view.setVisible(true);
+            });
+        }
+    }

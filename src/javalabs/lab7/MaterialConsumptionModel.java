@@ -1,8 +1,7 @@
-package javalabs.lab6.lab6_3;
-import javalabs.lab6.lab6_3.Model.MaterialConsumption;
+package javalabs.lab7;
+import javalabs.lab7.Model.MaterialConsumption;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class MaterialConsumptionModel {
     private final DynamicCollection<MaterialConsumption> materialConsumptions;
@@ -32,22 +31,22 @@ public class MaterialConsumptionModel {
     public int getSize() {
         return materialConsumptions.size();
     }
-    public void saveToFile(Scanner scanner) throws CustomException {
+    public void saveToFile(String filePath) throws CustomException {
         try {
             FileCollection<MaterialConsumption> fileCollection = new FileCollection<>();
             for (int i = 0; i < materialConsumptions.size(); i++) {
                 fileCollection.add(materialConsumptions.get(i));
             }
-            fileCollection.saveToJsonFile(scanner);
+            fileCollection.saveToJsonFile(filePath);
         } catch (IOException e) {
             throw new CustomException("Error saving file: " + e.getMessage());
         }
     }
 
-    public void loadFromFile(Scanner scanner) throws CustomException {
+    public void loadFromFile(String filePath) throws CustomException {
         try {
             FileCollection<MaterialConsumption> fileCollection = new FileCollection<>();
-            fileCollection.loadFromJsonFile(scanner);
+            fileCollection.loadFromJsonFile(filePath);
 
             for (int i = 0; i < fileCollection.size(); i++) {
                 materialConsumptions.add(fileCollection.get(i));
@@ -56,4 +55,6 @@ public class MaterialConsumptionModel {
             throw new CustomException("Error loading file: " + e.getMessage());
         }
     }
+
+
 }

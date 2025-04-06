@@ -1,4 +1,4 @@
-package javalabs.lab8.lab8_3.Model;
+package javalabs.lab7.Model;
 
 import java.util.Scanner;
 

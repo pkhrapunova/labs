@@ -1,4 +1,4 @@
-package javalabs.lab6.lab6_3;
+package javalabs.lab7;
 
 import java.util.Arrays;
 
