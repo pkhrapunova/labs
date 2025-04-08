@@ -1,34 +1,49 @@
 package javalabs.lab7;
 
-import javalabs.lab7.Model.MaterialConsumption;
+import javalabs.lab7.Model.*;
+
+
 import javax.swing.*;
-import java.awt.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
+import java.time.ZoneId;
+import java.util.Date;
 
 public class MaterialConsumptionView extends JFrame {
-    private JTable table;
-    private DefaultTableModel tableModel;
-    private JButton addButton, updateButton, deleteButton, saveButton, loadButton;
+    private final JTable table;
+    private final DefaultTableModel tableModel;
+    private final JButton addButton, updateButton, deleteButton, saveButton, loadButton;
 
     public MaterialConsumptionView() {
-        setTitle("Material Consumption Manager");
-        setSize(800, 600);
+        setTitle("Расход материала");
+        setSize(1200, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Создаем модель таблицы
-        String[] columns = {"Index", "Количество", "Материал", "Запись"};
+        // Колонки таблицы
+        String[] columns = {
+                "№", "Количество",
+                "Название материала", "Цена", "Категория",
+                "Дата", "Стоимость",
+                "Фамилия мастера", "Имя мастера", "Должность", "Телефон мастера",
+                "Фамилия клиента", "Имя клиента", "Телефон клиента"
+        };
+
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
+
+
+
         JScrollPane scrollPane = new JScrollPane(table);
 
-        // Создаем панель с кнопками
+        // Панель с кнопками
         JPanel buttonPanel = new JPanel(new FlowLayout());
-        addButton = new JButton("Add");
-        updateButton = new JButton("Update");
-        deleteButton = new JButton("Delete");
-        saveButton = new JButton("Save");
-        loadButton = new JButton("Load");
+        addButton = new JButton("Добавить");
+        updateButton = new JButton("Изменить");
+        deleteButton = new JButton("Удалить");
+        saveButton = new JButton("Сохранить");
+        loadButton = new JButton("Загрузить");
 
         buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
@@ -36,13 +51,11 @@ public class MaterialConsumptionView extends JFrame {
         buttonPanel.add(saveButton);
         buttonPanel.add(loadButton);
 
-        // Добавляем компоненты на форму
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    // Методы для работы с контроллером
     public void setAddButtonListener(java.awt.event.ActionListener listener) {
         addButton.addActionListener(listener);
     }
@@ -72,7 +85,7 @@ public class MaterialConsumptionView extends JFrame {
     }
 
     public void showError(String error) {
-        JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, error, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     public void updateTable(MaterialConsumption[] items) {
@@ -83,37 +96,24 @@ public class MaterialConsumptionView extends JFrame {
                 tableModel.addRow(new Object[]{
                         i,
                         item.getCount(),
-                        item.getMaterial(),
-                        item.getRecord(),
+                        item.getMaterial().getName(),
+                        item.getMaterial().getCost(),
+                        item.getMaterial().getCategories(),
+
+                        item.getRecord().getDate(),
+                        item.getRecord().getPrice(),
+
+                        item.getRecord().getMaster().getLastName(),
+                        item.getRecord().getMaster().getFirstName(),
+                        item.getRecord().getMaster().getPost(),
+                        item.getRecord().getMaster().getNumberPhone(),
+
+                        item.getRecord().getClient().getLastName(),
+                        item.getRecord().getClient().getFirstName(),
+                        item.getRecord().getClient().getNumberPhone()
                 });
             }
         }
-    }
-
-    public MaterialConsumption showInputDialog(String title, MaterialConsumption defaultValue) {
-        JTextField nameField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getCount()) : "");
-        JTextField quantityField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getMaterial()) : "");
-        JTextField unitField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord()) : "");
-
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.add(new JLabel("Количество:"));
-        panel.add(nameField);
-        panel.add(new JLabel("Материал:"));
-        panel.add(quantityField);
-        panel.add(new JLabel("Запись:"));
-        panel.add(unitField);
-
-        int result = JOptionPane.showConfirmDialog(this, panel, title,
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (result == JOptionPane.OK_OPTION) {
-            MaterialConsumption item = new MaterialConsumption();
-            item.setCount(Integer.parseInt(nameField.getText()));
-            //item.setMaterial(quantityField.getText());
-            //item.setUnit(unitField.getText());
-            return item;
-        }
-        return null;
     }
 
     public String showFileChooser(String title) {
@@ -125,4 +125,91 @@ public class MaterialConsumptionView extends JFrame {
         }
         return null;
     }
+
+    public MaterialConsumption showInputDialog(String title, MaterialConsumption defaultValue) {
+        JTextField countField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getCount()) : "");
+        JTextField nameField = new JTextField(defaultValue != null ? defaultValue.getMaterial().getName() : "");
+        JTextField costField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getMaterial().getCost()) : "");
+
+        JComboBox<Categories> categoryBox = new JComboBox<>(Categories.values());
+        if (defaultValue != null) {
+            categoryBox.setSelectedItem(defaultValue.getMaterial().getCategories());
+        }
+
+        JTextField priceField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getPrice()) : "");
+        JTextField lNameMasterField = new JTextField(defaultValue != null ? defaultValue.getRecord().getMaster().getLastName() : "");
+        JTextField fNameMasterField = new JTextField(defaultValue != null ? defaultValue.getRecord().getMaster().getFirstName() : "");
+        JTextField postField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getMaster().getPost()) : "");
+        JTextField numberPhoneMasterField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getMaster().getNumberPhone()) : "");
+        JTextField lNameClientField = new JTextField(defaultValue != null ? defaultValue.getRecord().getClient().getLastName() : "");
+        JTextField fNameClientField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getClient().getFirstName()) : "");
+        JTextField numberPhoneClientField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getClient().getNumberPhone()) : "");
+
+
+
+        // Создаем панель для ввода данных
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Количество:"));
+        panel.add(countField);
+        panel.add(new JLabel("Название материала:"));
+        panel.add(nameField);
+        panel.add(new JLabel("Цена:"));
+        panel.add(costField);
+        panel.add(new JLabel("Категория:"));
+        panel.add(categoryBox);
+        panel.add(new JLabel("Запись (стоимость):"));
+        panel.add(priceField);
+        panel.add(new JLabel("Фамилия мастера:"));
+        panel.add(lNameMasterField);
+        panel.add(new JLabel("Имя мастера:"));
+        panel.add(fNameMasterField);
+        panel.add(new JLabel("Должность мастера:"));
+        panel.add(postField);
+        panel.add(new JLabel("Номер телефона мастера:"));
+        panel.add(numberPhoneMasterField);
+        panel.add(new JLabel("Фамилия клиента:"));
+        panel.add(lNameClientField);
+        panel.add(new JLabel("Имя клиента:"));
+        panel.add(fNameClientField);
+        panel.add(new JLabel("Номер телефона клиента:"));
+        panel.add(numberPhoneClientField);
+
+
+        // Показать диалог
+        int result = JOptionPane.showConfirmDialog(this, panel, title,
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        // Если пользователь нажал "OK"
+        if (result == JOptionPane.OK_OPTION) {
+            MaterialConsumption item = new MaterialConsumption();
+
+            // Устанавливаем все значения
+            item.setCount(Integer.parseInt(countField.getText()));
+            item.getMaterial().setName(nameField.getText());
+            item.getMaterial().setCost(Double.parseDouble(costField.getText()));
+            item.getMaterial().setCategories((Categories) categoryBox.getSelectedItem());
+
+            // Устанавливаем запись (цена)
+            item.getRecord().setPrice(Double.parseDouble(priceField.getText()));
+
+            // Устанавливаем мастера
+            item.getRecord().getMaster().setLastName(lNameMasterField.getText());
+            item.getRecord().getMaster().setFirstName(fNameMasterField.getText());
+            item.getRecord().getMaster().setPost(postField.getText());
+            item.getRecord().getMaster().setNumberPhone(numberPhoneMasterField.getText());
+
+            // Устанавливаем клиента
+            item.getRecord().getClient().setLastName(lNameClientField.getText());
+            item.getRecord().getClient().setFirstName(fNameClientField.getText());
+            item.getRecord().getClient().setNumberPhone(numberPhoneClientField.getText());
+
+
+
+            return item;
+        }
+
+        return null;
+    }
+
+
 }

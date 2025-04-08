@@ -27,6 +27,9 @@ public class MaterialConsumptionModel {
         }
         return result;
     }
+    public MaterialConsumption get(int selectedItem) throws CustomException {
+        return materialConsumptions.get(selectedItem);
+    }
 
     public int getSize() {
         return materialConsumptions.size();

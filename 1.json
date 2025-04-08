@@ -1,28 +1,28 @@
 [
   {
-    "count": 1,
+    "count": 10,
     "material": {
-      "name": "1",
-      "cost": 1.0,
+      "name": "luxevizage",
+      "cost": 100.0,
       "categories": "EYE_SHADOW"
     },
     "record": {
       "date": {
-        "year": 1111,
+        "year": 2025,
         "month": 11,
         "day": 11
       },
-      "price": 1.0,
+      "price": 15.0,
       "master": {
-        "post": "1",
-        "lastName": "1",
-        "firstName": "1",
-        "numberPhone": "1"
+        "post": "Визажист",
+        "lastName": "иванова",
+        "firstName": "Ивана",
+        "numberPhone": "+3754444444"
       },
       "client": {
-        "lastName": "1",
-        "firstName": "1",
-        "numberPhone": "1"
+        "lastName": "петрова",
+        "firstName": "петра",
+        "numberPhone": "петровга"
       }
     }
   }

@@ -29,7 +29,7 @@ public class Record {
         return date;
     }
 
-    public void setDateTime(LocalDate date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -96,7 +96,7 @@ public class Record {
                 System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
             }
         }
-        this.setDateTime(date);
+        this.setDate(date);
         System.out.println("Enter master details:");
         this.master.scan(input);
 

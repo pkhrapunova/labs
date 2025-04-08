@@ -4,8 +4,8 @@ import javalabs.lab7.Model.MaterialConsumption;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
+//менять
 public class CollectionController {
     private final MaterialConsumptionModel model;
     private final MaterialConsumptionView view;
@@ -36,7 +36,7 @@ public class CollectionController {
     class AddButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            MaterialConsumption item = view.showInputDialog("Add New Material Consumption", new MaterialConsumption());
+            MaterialConsumption item = view.showInputDialog("Добавить расход материала", new MaterialConsumption());
             if (item != null) {
                 model.add(item);
                 updateView();
@@ -48,20 +48,20 @@ public class CollectionController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int selectedIndex = view.getSelectedIndex();
-//            if (selectedIndex >= 0) {
-//                try {
-//                    MaterialConsumption item = model.get(selectedIndex);
-//                    MaterialConsumption updatedItem = view.showInputDialog("Update Material Consumption", item);
-//                    if (updatedItem != null) {
-//                        model.update(selectedIndex, updatedItem);
-//                        updateView();
-//                    }
-//                } catch (CustomException ex) {
-//                    view.showError(ex.getMessage());
-//                }
-//            } else {
-//                view.showMessage("Please select an item to update.");
-//            }
+            if (selectedIndex >= 0) {
+                try {
+                    MaterialConsumption item = model.get(selectedIndex);
+                    MaterialConsumption updatedItem = view.showInputDialog("Изменить расход материала", item);
+                    if (updatedItem != null) {
+                        model.update(selectedIndex, updatedItem);
+                        updateView();
+                    }
+                } catch (CustomException ex) {
+                    view.showError(ex.getMessage());
+                }
+            } else {
+                view.showMessage("Please select an item to update.");
+            }
         }
     }
 
