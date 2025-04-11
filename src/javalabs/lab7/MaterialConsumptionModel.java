@@ -31,9 +31,7 @@ public class MaterialConsumptionModel {
         return materialConsumptions.get(selectedItem);
     }
 
-    public int getSize() {
-        return materialConsumptions.size();
-    }
+
     public void saveToFile(String filePath) throws CustomException {
         try {
             FileCollection<MaterialConsumption> fileCollection = new FileCollection<>();
