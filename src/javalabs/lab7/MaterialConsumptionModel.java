@@ -58,6 +58,4 @@ public class MaterialConsumptionModel {
             throw new CustomException("Error loading file: " + e.getMessage());
         }
     }
-
-
 }

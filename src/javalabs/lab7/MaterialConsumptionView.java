@@ -1,14 +1,13 @@
 package javalabs.lab7;
 
 import javalabs.lab7.Model.*;
-
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import java.time.ZoneId;
-import java.util.Date;
 
 public class MaterialConsumptionView extends JFrame {
     private final JTable table;
@@ -17,11 +16,14 @@ public class MaterialConsumptionView extends JFrame {
 
     public MaterialConsumptionView() {
         setTitle("Расход материала");
-        setSize(1200, 600);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        ImageIcon icon = new ImageIcon("src/javalabs/lab7/women.png");
+        setIconImage(icon.getImage());
 
-        // Колонки таблицы
+
+
         String[] columns = {
                 "№", "Количество",
                 "Название материала", "Цена", "Категория",
@@ -135,7 +137,7 @@ public class MaterialConsumptionView extends JFrame {
         if (defaultValue != null) {
             categoryBox.setSelectedItem(defaultValue.getMaterial().getCategories());
         }
-
+        JTextField dateField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getDate()) : "");
         JTextField priceField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getPrice()) : "");
         JTextField lNameMasterField = new JTextField(defaultValue != null ? defaultValue.getRecord().getMaster().getLastName() : "");
         JTextField fNameMasterField = new JTextField(defaultValue != null ? defaultValue.getRecord().getMaster().getFirstName() : "");
@@ -146,19 +148,20 @@ public class MaterialConsumptionView extends JFrame {
         JTextField numberPhoneClientField = new JTextField(defaultValue != null ? String.valueOf(defaultValue.getRecord().getClient().getNumberPhone()) : "");
 
 
-
         // Создаем панель для ввода данных
         JPanel panel = new JPanel(new GridLayout(0, 1));
         panel.add(new JLabel("Количество:"));
         panel.add(countField);
         panel.add(new JLabel("Название материала:"));
         panel.add(nameField);
-        panel.add(new JLabel("Цена:"));
+        panel.add(new JLabel("Цена($):"));
         panel.add(costField);
         panel.add(new JLabel("Категория:"));
         panel.add(categoryBox);
-        panel.add(new JLabel("Запись (стоимость):"));
+        panel.add(new JLabel("Стоимость($):"));
         panel.add(priceField);
+        panel.add(new JLabel("Дата (yyyy-MM-dd):"));
+        panel.add(dateField);
         panel.add(new JLabel("Фамилия мастера:"));
         panel.add(lNameMasterField);
         panel.add(new JLabel("Имя мастера:"));
@@ -175,41 +178,102 @@ public class MaterialConsumptionView extends JFrame {
         panel.add(numberPhoneClientField);
 
 
-        // Показать диалог
-        int result = JOptionPane.showConfirmDialog(this, panel, title,
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        while (true) {
+            int result = JOptionPane.showConfirmDialog(this, panel, title,
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+            if (result == JOptionPane.OK_OPTION) {
+                MaterialConsumption item = new MaterialConsumption();
 
-        // Если пользователь нажал "OK"
-        if (result == JOptionPane.OK_OPTION) {
-            MaterialConsumption item = new MaterialConsumption();
+                try {
+                    String countText = countField.getText().trim();
+                    if (countText.isEmpty() || Double.parseDouble(countText) < 0) {
+                        showError("Количество должно быть положительным числом.");
+                        continue;
+                    }
+                    item.setCount(Double.parseDouble(countText));
 
-            // Устанавливаем все значения
-            item.setCount(Integer.parseInt(countField.getText()));
-            item.getMaterial().setName(nameField.getText());
-            item.getMaterial().setCost(Double.parseDouble(costField.getText()));
-            item.getMaterial().setCategories((Categories) categoryBox.getSelectedItem());
+                    String name = nameField.getText().trim();
+                    if (name.isEmpty()) {
+                        showError("Название материала не может быть пустым.");
+                        continue;
+                    }
+                    item.getMaterial().setName(name);
 
-            // Устанавливаем запись (цена)
-            item.getRecord().setPrice(Double.parseDouble(priceField.getText()));
+                    String costText = costField.getText().trim();
+                    if (costText.isEmpty() || Double.parseDouble(costText) < 0) {
+                        showError("Цена материала должна быть положительным числом.");
+                        continue;
+                    }
+                    item.getMaterial().setCost(Double.parseDouble(costText));
 
-            // Устанавливаем мастера
-            item.getRecord().getMaster().setLastName(lNameMasterField.getText());
-            item.getRecord().getMaster().setFirstName(fNameMasterField.getText());
-            item.getRecord().getMaster().setPost(postField.getText());
-            item.getRecord().getMaster().setNumberPhone(numberPhoneMasterField.getText());
+                    item.getMaterial().setCategories((Categories) categoryBox.getSelectedItem());
 
-            // Устанавливаем клиента
-            item.getRecord().getClient().setLastName(lNameClientField.getText());
-            item.getRecord().getClient().setFirstName(fNameClientField.getText());
-            item.getRecord().getClient().setNumberPhone(numberPhoneClientField.getText());
+                    String priceText = priceField.getText().trim();
+                    if (priceText.isEmpty() || Double.parseDouble(priceText) < 0) {
+                        showError("Стоимость записи должна быть положительным числом.");
+                        continue;
+                    }
+                    item.getRecord().setPrice(Double.parseDouble(priceText));
 
 
+                    String dateText = dateField.getText().trim();
+                    if (dateText.isEmpty()) {
+                        showError("Дата не может быть пустой.");
+                        continue;
+                    }
 
-            return item;
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    try {
+                        LocalDate date = LocalDate.parse(dateText, formatter);
+                        item.getRecord().setDate(date);
+                    } catch (DateTimeParseException e) {
+                        showError("Неверный формат даты. Используйте yyyy-MM-dd.");
+                        continue;
+                    }
+
+                    if (lNameMasterField.getText().trim().isEmpty()) {
+                        showError("Фамилия мастера не может быть пустой.");
+                        continue;
+                    }
+                    item.getRecord().getMaster().setLastName(lNameMasterField.getText().trim());
+
+                    if (fNameMasterField.getText().trim().isEmpty()) {
+                        showError("Имя мастера не может быть пустым.");
+                        continue;
+                    }
+                    item.getRecord().getMaster().setFirstName(fNameMasterField.getText().trim());
+
+                    if (numberPhoneMasterField.getText().trim().isEmpty()) {
+                        showError("Номер телефона мастера не может быть пустым.");
+                        continue;
+                    }
+                    item.getRecord().getMaster().setNumberPhone(numberPhoneMasterField.getText().trim());
+
+                    if (lNameClientField.getText().trim().isEmpty()) {
+                        showError("Фамилия клиента не может быть пустой.");
+                        continue;
+                    }
+                    item.getRecord().getClient().setLastName(lNameClientField.getText().trim());
+
+                    if (fNameClientField.getText().trim().isEmpty()) {
+                        showError("Имя клиента не может быть пустым.");
+                        continue;
+                    }
+                    item.getRecord().getClient().setFirstName(fNameClientField.getText().trim());
+
+                    if (numberPhoneClientField.getText().trim().isEmpty()) {
+                        showError("Номер телефона клиента не может быть пустым.");
+                        continue;
+                    }
+                    item.getRecord().getClient().setNumberPhone(numberPhoneClientField.getText().trim());
+
+                    return item;
+                } catch (NumberFormatException e) {
+                    showError("Некорректный ввод числовых значений.");
+                }
+            } else {
+                return null;
+            }
         }
-
-        return null;
     }
-
-
 }

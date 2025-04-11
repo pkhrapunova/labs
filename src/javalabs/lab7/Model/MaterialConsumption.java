@@ -3,11 +3,11 @@ package javalabs.lab7.Model;
 import java.util.Scanner;
 
 public class MaterialConsumption {
-    private int count;
+    private double count;
     private Material material;
     private Record record;
 
-    public MaterialConsumption(int count, Record record, Material material) {
+    public MaterialConsumption(double count, Record record, Material material) {
         this.record = record;
         this.material = material;
         this.count = count;
@@ -19,11 +19,11 @@ public class MaterialConsumption {
         this.record = new Record();
     }
 
-    public int getCount() {
+    public double getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(double count) {
         this.count = count;
     }
 
@@ -77,7 +77,5 @@ public class MaterialConsumption {
         System.out.println("Enter record details:");
         this.record.scan(input);
     }
-
-
 
 }

@@ -1,11 +1,9 @@
 package javalabs.lab7;
 
 import javalabs.lab7.Model.MaterialConsumption;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//менять
 public class CollectionController {
     private final MaterialConsumptionModel model;
     private final MaterialConsumptionView view;
@@ -14,14 +12,12 @@ public class CollectionController {
         this.model = model;
         this.view = view;
 
-        // Настраиваем обработчики событий
         view.setAddButtonListener(new AddButtonListener());
         view.setUpdateButtonListener(new UpdateButtonListener());
         view.setDeleteButtonListener(new DeleteButtonListener());
         view.setSaveButtonListener(new SaveButtonListener());
         view.setLoadButtonListener(new LoadButtonListener());
 
-        // Обновляем таблицу при запуске
         updateView();
     }
 
@@ -77,7 +73,7 @@ public class CollectionController {
                     view.showError(ex.getMessage());
                 }
             } else {
-                view.showMessage("Please select an item to delete.");
+                view.showMessage("Выберите объект для удаления.");
             }
         }
     }
@@ -86,10 +82,10 @@ public class CollectionController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                String filePath = view.showFileChooser("Save to file");
+                String filePath = view.showFileChooser("Сохранение в файл");
                 if (filePath != null) {
                     model.saveToFile(filePath);
-                    view.showMessage("Data saved successfully.");
+                    view.showMessage("Успешно сохранено.");
                 }
             } catch (Exception ex) {
                 view.showError("Error saving file: " + ex.getMessage());
@@ -101,11 +97,11 @@ public class CollectionController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                String filePath = view.showFileChooser("Load from file");
+                String filePath = view.showFileChooser("Загрузка");
                 if (filePath != null) {
                     model.loadFromFile(filePath);
                     updateView();
-                    view.showMessage("Data loaded successfully.");
+                    view.showMessage("Загружено успешно.");
                 }
             } catch (Exception ex) {
                 view.showError("Error loading file: " + ex.getMessage());
