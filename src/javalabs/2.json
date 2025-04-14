@@ -1,0 +1,407 @@
+[
+  {
+    "count": 5,
+    "material": {
+      "name": "Lux Lip 01",
+      "cost": 120.0,
+      "categories": "LIPSTICK"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 6,
+        "day": 14
+      },
+      "price": 20.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Сидорова",
+        "firstName": "Мария",
+        "numberPhone": "+375291112233"
+      },
+      "client": {
+        "lastName": "Алексеева",
+        "firstName": "Наталья",
+        "numberPhone": "+375291113344"
+      }
+    }
+  },
+  {
+    "count": 8,
+    "material": {
+      "name": "Silk Eyes",
+      "cost": 90.0,
+      "categories": "EYE_SHADOW"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 7,
+        "day": 3
+      },
+      "price": 18.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Иванова",
+        "firstName": "Елена",
+        "numberPhone": "+375292223344"
+      },
+      "client": {
+        "lastName": "Морозова",
+        "firstName": "Анна",
+        "numberPhone": "+375291112255"
+      }
+    }
+  },
+  {
+    "count": 6,
+    "material": {
+      "name": "Hair Shine",
+      "cost": 75.0,
+      "categories": "SHAMPOO"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 8,
+        "day": 19
+      },
+      "price": 12.0,
+      "master": {
+        "post": "Парикмахер",
+        "lastName": "Козлова",
+        "firstName": "Ольга",
+        "numberPhone": "+375293334455"
+      },
+      "client": {
+        "lastName": "Федорова",
+        "firstName": "Светлана",
+        "numberPhone": "+375295556677"
+      }
+    }
+  },
+  {
+    "count": 4,
+    "material": {
+      "name": "Strong Hold",
+      "cost": 60.0,
+      "categories": "STYLING_GEL"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "day": 5
+      },
+      "price": 10.0,
+      "master": {
+        "post": "Стилист",
+        "lastName": "Орлова",
+        "firstName": "Инна",
+        "numberPhone": "+375297776655"
+      },
+      "client": {
+        "lastName": "Белова",
+        "firstName": "Юлия",
+        "numberPhone": "+375291119988"
+      }
+    }
+  },
+  {
+    "count": 10,
+    "material": {
+      "name": "Glossy Red",
+      "cost": 110.0,
+      "categories": "NAIL_POLISH"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 4,
+        "day": 25
+      },
+      "price": 15.0,
+      "master": {
+        "post": "Мастер маникюра",
+        "lastName": "Титова",
+        "firstName": "Дарья",
+        "numberPhone": "+375296663322"
+      },
+      "client": {
+        "lastName": "Громова",
+        "firstName": "Екатерина",
+        "numberPhone": "+375297771100"
+      }
+    }
+  },
+  {
+    "count": 3,
+    "material": {
+      "name": "Precision File",
+      "cost": 25.0,
+      "categories": "NAIL_FILE"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 1
+      },
+      "price": 5.0,
+      "master": {
+        "post": "Мастер маникюра",
+        "lastName": "Никитина",
+        "firstName": "Жанна",
+        "numberPhone": "+375295551144"
+      },
+      "client": {
+        "lastName": "Лебедева",
+        "firstName": "Ирина",
+        "numberPhone": "+375298884477"
+      }
+    }
+  },
+  {
+    "count": 7,
+    "material": {
+      "name": "Luxe Pink",
+      "cost": 130.0,
+      "categories": "LIPSTICK"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 11,
+        "day": 14
+      },
+      "price": 22.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Кириллова",
+        "firstName": "Людмила",
+        "numberPhone": "+375296661155"
+      },
+      "client": {
+        "lastName": "Воронова",
+        "firstName": "Евгения",
+        "numberPhone": "+375297778899"
+      }
+    }
+  },
+  {
+    "count": 6,
+    "material": {
+      "name": "Tonic Fresh",
+      "cost": 70.0,
+      "categories": "HAIR_TONIC"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 7
+      },
+      "price": 11.0,
+      "master": {
+        "post": "Парикмахер",
+        "lastName": "Зайцева",
+        "firstName": "Вера",
+        "numberPhone": "+375294445566"
+      },
+      "client": {
+        "lastName": "Ефимова",
+        "firstName": "Тамара",
+        "numberPhone": "+375291122334"
+      }
+    }
+  },
+  {
+    "count": 2,
+    "material": {
+      "name": "Cuticle Soft",
+      "cost": 45.0,
+      "categories": "CUTICLE_OIL"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 3,
+        "day": 30
+      },
+      "price": 8.0,
+      "master": {
+        "post": "Мастер маникюра",
+        "lastName": "Гаврилова",
+        "firstName": "Любава",
+        "numberPhone": "+375296667788"
+      },
+      "client": {
+        "lastName": "Зиновьева",
+        "firstName": "Елена",
+        "numberPhone": "+375295554466"
+      }
+    }
+  },
+  {
+    "count": 9,
+    "material": {
+      "name": "Velvet Eyes",
+      "cost": 95.0,
+      "categories": "EYE_SHADOW"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 5,
+        "day": 15
+      },
+      "price": 16.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Ларионова",
+        "firstName": "Кира",
+        "numberPhone": "+375298887766"
+      },
+      "client": {
+        "lastName": "Калинина",
+        "firstName": "Марина",
+        "numberPhone": "+375291100220"
+      }
+    }
+  },
+  {
+    "count": 3,
+    "material": {
+      "name": "Foot Care Scrub",
+      "cost": 50.0,
+      "categories": "FOOT_SCRUB"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 6,
+        "day": 22
+      },
+      "price": 9.0,
+      "master": {
+        "post": "Косметолог",
+        "lastName": "Фролова",
+        "firstName": "Инга",
+        "numberPhone": "+375295552211"
+      },
+      "client": {
+        "lastName": "Куликова",
+        "firstName": "Алиса",
+        "numberPhone": "+375298887733"
+      }
+    }
+  },
+  {
+    "count": 5,
+    "material": {
+      "name": "Luxe Coral",
+      "cost": 125.0,
+      "categories": "LIPSTICK"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 1,
+        "day": 18
+      },
+      "price": 21.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Мороз",
+        "firstName": "Арина",
+        "numberPhone": "+375293339944"
+      },
+      "client": {
+        "lastName": "Соколова",
+        "firstName": "Злата",
+        "numberPhone": "+375291102233"
+      }
+    }
+  },
+  {
+    "count": 4,
+    "material": {
+      "name": "Metallic Polish",
+      "cost": 100.0,
+      "categories": "NAIL_POLISH"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 2,
+        "day": 11
+      },
+      "price": 14.0,
+      "master": {
+        "post": "Мастер маникюра",
+        "lastName": "Александрова",
+        "firstName": "Валентина",
+        "numberPhone": "+375291114477"
+      },
+      "client": {
+        "lastName": "Киселева",
+        "firstName": "Диана",
+        "numberPhone": "+375298889900"
+      }
+    }
+  },
+  {
+    "count": 6,
+    "material": {
+      "name": "Eye Dust",
+      "cost": 85.0,
+      "categories": "EYE_SHADOW"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 10,
+        "day": 17
+      },
+      "price": 17.0,
+      "master": {
+        "post": "Визажист",
+        "lastName": "Мельникова",
+        "firstName": "Агата",
+        "numberPhone": "+375291199922"
+      },
+      "client": {
+        "lastName": "Чернова",
+        "firstName": "Вера",
+        "numberPhone": "+375297778822"
+      }
+    }
+  },
+  {
+    "count": 3,
+    "material": {
+      "name": "Styling Max",
+      "cost": 65.0,
+      "categories": "STYLING_GEL"
+    },
+    "record": {
+      "date": {
+        "year": 2025,
+        "month": 9,
+        "day": 20
+      },
+      "price": 10.0,
+      "master": {
+        "post": "Стилист",
+        "lastName": "Егорова",
+        "firstName": "Валерия",
+        "numberPhone": "+375294443322"
+      },
+      "client": {
+        "lastName": "Романова",
+        "firstName": "Елена",
+        "numberPhone": "+375296669911"
+      }
+    }
+  }
+]

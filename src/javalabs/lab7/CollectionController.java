@@ -56,7 +56,7 @@ public class CollectionController {
                     view.showError(ex.getMessage());
                 }
             } else {
-                view.showMessage("Please select an item to update.");
+                view.showMessage("Выберите элемент для обновления.");
             }
         }
     }
