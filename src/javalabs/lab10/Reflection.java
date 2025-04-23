@@ -178,7 +178,6 @@ public class Reflection {
         StringBuilder skeleton = new StringBuilder();
         skeleton.append("public class ").append(clazz.getSimpleName()).append(" {\n");
 
-        // Поля
         for (Field field : clazz.getDeclaredFields()) {
             String mods = Modifier.toString(field.getModifiers());
             if (!mods.isEmpty()) skeleton.append(INDENT).append(mods).append(" ");
@@ -186,7 +185,6 @@ public class Reflection {
             skeleton.append(field.getType().getSimpleName()).append(" ").append(field.getName()).append(";\n");
         }
 
-        // Методы
         for (Method method : clazz.getDeclaredMethods()) {
             String mods = Modifier.toString(method.getModifiers());
             if (!mods.isEmpty()) skeleton.append(INDENT).append(mods).append(" ");
@@ -203,7 +201,6 @@ public class Reflection {
 
             skeleton.append(")");
 
-            // Обработка исключений
             Class<?>[] exceptions = method.getExceptionTypes();
             if (exceptions.length > 0) {
                 skeleton.append(" throws ");
