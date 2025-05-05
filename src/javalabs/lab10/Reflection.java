@@ -166,7 +166,7 @@ public class Reflection {
 
     public static void task6() {
         System.out.println("\n\n-----------------------task6-------------------------------------------");
-        Method[] stringMethods = getMethodsByReturnType(String.class, String.class);
+        Method[] stringMethods = getMethodsByReturnType(String.class, int.class);
 
         System.out.println("Методы класса, которые возвращают заданый класс:");
         for (Method method : stringMethods) {
