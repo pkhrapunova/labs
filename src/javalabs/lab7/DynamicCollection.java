@@ -15,7 +15,7 @@ public class DynamicCollection<T> {
     public int size() {
         return size;
     }
-
+//no hi
     public void add(T element) {
         if (size == elements.length) {
             increaseCapacity();
